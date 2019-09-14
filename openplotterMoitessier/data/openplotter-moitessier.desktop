@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=OpenPlotter My App
-Exec=openplotter-myapp
-Icon=openplotter-myapp
+Name=OpenPlotter Moitessier HAT
+Exec=openplotter-moitessier
+Icon=openplotter-moitessier
 StartupNotify=true
 Terminal=false
 Type=Application

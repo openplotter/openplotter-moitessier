@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 # This file is part of Openplotter.
-# Copyright (C) 2019 by xxxx <https://github.com/xxxx/openplotter-myapp>
-#
+# Copyright (C) 2019 by Sailoog <https://github.com/openplotter/openplotter-moitessier>
+#                  
 # Openplotter is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -15,11 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
+
 import wx, os, webbrowser, subprocess, socket
 import wx.richtext as rt
 from openplotterSettings import conf
 from openplotterSettings import language
-# use the class "platform" to get info about the host system. See: https://github.com/openplotter/openplotter-settings/blob/master/openplotterSettings/platform.py
 from openplotterSettings import platform
 
 class MyFrame(wx.Frame):
