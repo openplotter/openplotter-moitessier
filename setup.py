@@ -31,6 +31,6 @@ setup (
 	'Operating System :: POSIX :: Linux',
 	'Programming Language :: Python :: 3'],
 	include_package_data=True,
-	entry_points={'console_scripts': ['openplotter-moitessier=openplotterMoitessier.openplotterMoitessier:main','moitessierPreUninstall=openplotterMoitessier.moitessierPreUninstall:main']},
+	entry_points={'console_scripts': ['openplotter-moitessier=openplotterMoitessier.openplotterMoitessier:main','moitessierPostInstall=openplotterMoitessier.moitessierPostInstall:main','moitessierPreUninstall=openplotterMoitessier.moitessierPreUninstall:main']},
 	data_files=[('share/applications', ['openplotterMoitessier/data/openplotter-moitessier.desktop']),('share/pixmaps', ['openplotterMoitessier/data/openplotter-moitessier.png']),],
 	)

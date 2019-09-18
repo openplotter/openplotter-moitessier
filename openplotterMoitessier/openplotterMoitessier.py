@@ -29,6 +29,7 @@ class MyFrame(wx.Frame):
 		self.currentdir = os.path.dirname(__file__)
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = language.Language(self.currentdir,'openplotter-moitessier',self.currentLanguage)
+		self.driversFolder = self.conf.conf_folder+'/moitessier'
 
 		wx.Frame.__init__(self, None, title=_('OpenPlotter Moitessier HAT App'), size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
@@ -298,13 +299,15 @@ class MyFrame(wx.Frame):
 	def pageDrivers(self):
 		kernel_box = wx.StaticBox(self.drivers, -1, _(' Current kernel version '))
 
-		self.kernel_label = wx.StaticText(self.drivers, -1)
+		kernel_label = wx.StaticText(self.drivers, -1)
+		kernel = subprocess.check_output(['uname','-a']).decode('utf-8')
+		kernel_label.SetLabel(kernel)
 
 		packages_box = wx.StaticBox(self.drivers, -1, _(' Available packages '))
 
 		self.packages_list = []
 		self.packages_select = wx.Choice(self.drivers, choices=self.packages_list, style=wx.CB_READONLY)
-		#self.readAvailable()
+		self.readAvailable()
 
 		button_install = wx.Button(self.drivers, label=_('Install'))
 		self.Bind(wx.EVT_BUTTON, self.on_install, button_install)
@@ -317,7 +320,7 @@ class MyFrame(wx.Frame):
 
 		v_kernel_box = wx.StaticBoxSizer(kernel_box, wx.VERTICAL)
 		v_kernel_box.AddSpacer(5)
-		v_kernel_box.Add(self.kernel_label, 0, wx.ALL | wx.EXPAND, 5)
+		v_kernel_box.Add(kernel_label, 0, wx.ALL | wx.EXPAND, 10)
 
 		h_packages_box = wx.StaticBoxSizer(packages_box, wx.HORIZONTAL)
 		h_packages_box.Add(self.packages_select, 1, wx.ALL | wx.EXPAND, 5)
@@ -335,13 +338,13 @@ class MyFrame(wx.Frame):
 	def readAvailable(self):
 		self.packages_select.Clear()
 		self.packages_list = []
-		kernel = subprocess.check_output(['uname','-r']).decode()
+		kernel = subprocess.check_output(['uname','-r']).decode('utf-8')
 		kernel = kernel.split('.')
 		kernelA = int(kernel[0])
 		kernelB = int(kernel[1])
 		kernelC = kernel[2].split('-')
 		kernelC = int(kernelC[0])
-		tmp = os.listdir(self.op_folder+'/tools/moitessier_hat/packages')
+		tmp = os.listdir(self.driversFolder)
 		for i in tmp:
 			package = i.split('_')
 			package = package[1]
@@ -357,33 +360,37 @@ class MyFrame(wx.Frame):
 
 	def on_install(self,e):
 		if self.packages_select.GetStringSelection() == '':
-			self.logger3.SetValue(_('Select a package to install.'))
+			self.ShowStatusBarYELLOW(_('Select a package to install.'))
 		else:
-			subprocess.Popen(['lxterminal', '-e', 'bash', self.op_folder+'/tools/moitessier_hat/install.sh', self.op_folder+'/tools/moitessier_hat/packages/'+self.packages_select.GetStringSelection()])
-			self.logger3.SetValue(_('Updating Moitessier Hat modules and firmware...'))
+			self.ShowStatusBarYELLOW(_('Updating Moitessier Hat modules and firmware...'))
+			self.logger.Clear()
+			self.notebook.ChangeSelection(3)
+			self.logger.EndBold()
+			self.logger.BeginTextColour((55, 55, 55))
+			command = self.platform.admin+' dpkg -i '+self.driversFolder+'/'+self.packages_select.GetStringSelection()
+			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
+			for line in popen.stdout:
+				if not 'Warning' in line and not 'WARNING' in line:
+					self.logger.WriteText(line)
+					self.ShowStatusBarYELLOW(_('Installing package data, please wait... ')+line)
+					self.logger.ShowPosition(self.logger.GetLastPosition())
+			self.logger.EndTextColour()
+			
 
 	def onDownload(self,e):
-		self.logger3.Clear()
-		self.logger3.BeginTextColour((55, 55, 55))
-		kernel = subprocess.check_output(['uname','-r'])
+		kernel = subprocess.check_output(['uname','-r']).decode('utf-8')
 		kernel = kernel.split('-')
 		kernel = kernel[0]
 		file = 'moitessier_'+kernel+'_armhf.deb'
-		self.logger3.WriteText(_('Searching file '))
-		self.logger3.BeginBold()
-		self.logger3.WriteText(file)
-		self.logger3.EndBold()
-		self.logger3.WriteText(' ...')
-		self.logger3.Newline()
-		if os.path.isfile(self.op_folder+'/tools/moitessier_hat/packages/'+file):
-			self.logger3.WriteText(_('This file already exists!'))
+		self.ShowStatusBarYELLOW(_('Searching file ')+file+' ...')
+		if os.path.isfile(self.driversFolder+'/'+file):
+			self.ShowStatusBarBLACK(_('This file already exists!'))
 		else:
 			try:
-				out = subprocess.check_output(['wget','https://get.rooco.tech/moitessier/release/'+kernel+'/latest/'+file, '-P', self.op_folder+'/tools/moitessier_hat/packages'])
-				self.logger3.WriteText(_('File downloaded!'))
+				out = subprocess.check_output(['wget','https://get.rooco.tech/moitessier/buster/release/'+kernel+'/latest/'+file, '-P', self.driversFolder]).decode('utf-8')
+				self.ShowStatusBarGREEN(_('File downloaded!'))
 			except:
-				self.logger3.WriteText(_('File not found!'))
-		self.logger3.EndTextColour()
+				self.ShowStatusBarRED(_('File not found!'))
 		self.readAvailable()
 
 	def onDrivers(self, e):
