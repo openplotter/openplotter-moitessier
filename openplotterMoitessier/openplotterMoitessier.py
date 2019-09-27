@@ -83,8 +83,11 @@ class MyFrame(wx.Frame):
 		self.pageDrivers()
 		self.pageSettings()
 		self.pageOutput()
+
+		maxi = self.conf.get('GENERAL', 'maximize')
+		if maxi == '1': self.Maximize()
 		
-		self.Centre() 
+		self.Centre()
 
 	def ShowStatusBar(self, w_msg, colour):
 		self.GetStatusBar().SetForegroundColour(colour)
