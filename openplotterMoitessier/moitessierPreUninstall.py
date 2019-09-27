@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import os
+import os, shutil, subprocess
 from openplotterSettings import conf
 from openplotterSettings import language
 
@@ -26,12 +26,19 @@ def main():
 	language.Language(currentdir,'openplotter-moitessier',currentLanguage)
 
 
-	print(_('Removing Moitessier HAT drivers...'))
+	print(_('Removing drivers packages...'))
 	try:
+		confFolder = conf2.conf_folder+'/moitessier'
+		shutil.rmtree(confFolder)
 
 		print(_('DONE'))
 	except Exception as e: print(_('FAILED: ')+str(e))
 
+	print(_('Uninstalling drivers...'))
+	try:
+		subprocess.call(['dpkg', '-r', 'moitessier'])
+		print(_('DONE'))
+	except Exception as e: print(_('FAILED: ')+str(e))
 
 if __name__ == '__main__':
 	main()

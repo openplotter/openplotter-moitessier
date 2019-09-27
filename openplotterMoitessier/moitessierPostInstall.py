@@ -14,7 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
-import os
+import os, shutil, subprocess
 from openplotterSettings import conf
 from openplotterSettings import language
 
@@ -25,13 +25,19 @@ def main():
 	language.Language(currentdir,'openplotter-moitessier',currentLanguage)
 
 
-	print(_('xxxxxxx...'))
+	print(_('Copying driver packages...'))
 	try:
-		self.driversFolder = conf2.conf_folder+'/moitessier'
-		if not os.path.exists(self.driversFolder): os.mkdir(self.driversFolder)
+		confFolder = conf2.conf_folder+'/moitessier'
+		if not os.path.exists(confFolder): os.mkdir(confFolder)
 
-		#TODO copy all packages
-		
+		packageFolder = currentdir+'/packages'
+		if os.path.exists(packageFolder):
+			tmp = os.listdir(packageFolder)
+			for i in tmp:
+				shutil.copy(packageFolder+'/'+i, confFolder)
+
+		subprocess.call(['chown', '-R', conf2.user, confFolder])
+
 		print(_('DONE'))
 	except Exception as e: print(_('FAILED: ')+str(e))
 

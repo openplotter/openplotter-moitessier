@@ -15,8 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import wx, os, webbrowser, subprocess
+import wx, os, webbrowser, subprocess, ujson
 import wx.richtext as rt
+import xml.etree.ElementTree as ET
 from openplotterSettings import conf
 from openplotterSettings import language
 from openplotterSettings import platform
@@ -47,9 +48,6 @@ class MyFrame(wx.Frame):
 		toolSettings = self.toolbar1.AddTool(102, _('Settings'), wx.Bitmap(self.currentdir+"/data/settings.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolSettings, toolSettings)
 		self.toolbar1.AddSeparator()
-		toolCheckConf = self.toolbar1.AddTool(106, _('Check configuration'), wx.Bitmap(self.currentdir+"/data/check.png"))
-		self.Bind(wx.EVT_TOOL, self.OnToolCheckConf, toolCheckConf)
-		self.toolbar1.AddSeparator()
 		toolApply = self.toolbar1.AddTool(104, _('Apply Changes'), wx.Bitmap(self.currentdir+"/data/apply.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolApply, toolApply)
 		toolCancel = self.toolbar1.AddTool(105, _('Cancel Changes'), wx.Bitmap(self.currentdir+"/data/cancel.png"))
@@ -61,14 +59,14 @@ class MyFrame(wx.Frame):
 		self.drivers = wx.Panel(self.notebook)
 		self.settings = wx.Panel(self.notebook)
 		self.output = wx.Panel(self.notebook)
-		self.notebook.AddPage(self.info, _('HAT Info'))
+		self.notebook.AddPage(self.info, '')
 		self.notebook.AddPage(self.drivers, _('Drivers'))
 		self.notebook.AddPage(self.settings, _('Settings'))
-		self.notebook.AddPage(self.output, _('Output'))
+		self.notebook.AddPage(self.output, '')
 		self.il = wx.ImageList(24, 24)
-		img0 = self.il.Add(wx.Bitmap(self.currentdir+"/data/openplotter-24.png", wx.BITMAP_TYPE_PNG))
-		img1 = self.il.Add(wx.Bitmap(self.currentdir+"/data/openplotter-24.png", wx.BITMAP_TYPE_PNG))
-		img2 = self.il.Add(wx.Bitmap(self.currentdir+"/data/openplotter-24.png", wx.BITMAP_TYPE_PNG))
+		img0 = self.il.Add(wx.Bitmap(self.currentdir+"/data/info.png", wx.BITMAP_TYPE_PNG))
+		img1 = self.il.Add(wx.Bitmap(self.currentdir+"/data/driver.png", wx.BITMAP_TYPE_PNG))
+		img2 = self.il.Add(wx.Bitmap(self.currentdir+"/data/settings2.png", wx.BITMAP_TYPE_PNG))
 		img3 = self.il.Add(wx.Bitmap(self.currentdir+"/data/output.png", wx.BITMAP_TYPE_PNG))
 		self.notebook.AssignImageList(self.il)
 		self.notebook.SetPageImage(0, img0)
@@ -106,6 +104,12 @@ class MyFrame(wx.Frame):
 
 	def onTabChange(self, event):
 		self.SetStatusText('')
+		if self.notebook.GetSelection() == 2:
+			self.toolbar1.EnableTool(104,True)
+			self.toolbar1.EnableTool(105,True)
+		else:
+			self.toolbar1.EnableTool(104,False)
+			self.toolbar1.EnableTool(105,False)
 
 	def OnToolHelp(self, event): 
 		url = "/usr/share/openplotter-doc/moitessier/moitessier_app.html"
@@ -126,24 +130,24 @@ class MyFrame(wx.Frame):
 	def pageInfo(self):
 		self.toolbar2 = wx.ToolBar(self.info, style=wx.TB_TEXT)
 
-		toolCheck = self.toolbar2.AddTool(201, _('Check'), wx.Bitmap(self.currentdir+"/data/check.png"))
+		toolCheck = self.toolbar2.AddTool(201, _('Check System'), wx.Bitmap(self.currentdir+"/data/check.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolCheck, toolCheck)
-		toolInfo = self.toolbar2.AddTool(202, _('Settings'), wx.Bitmap(self.currentdir+"/data/openplotter-24.png"))
+		toolCheckConf = self.toolbar2.AddTool(205, _('Check configuration'), wx.Bitmap(self.currentdir+"/data/check.png"))
+		self.Bind(wx.EVT_TOOL, self.OnToolCheckConf, toolCheckConf)
+		self.toolbar2.AddSeparator()
+		toolInfo = self.toolbar2.AddTool(202, _('Check Settings'), wx.Bitmap(self.currentdir+"/data/settings2.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolInfo, toolInfo)
 		self.toolbar2.AddSeparator()
-		toolStatistics = self.toolbar2.AddTool(203, _('Statistics'), wx.Bitmap(self.currentdir+"/data/openplotter-24.png"))
+		toolStatistics = self.toolbar2.AddTool(203, _('Statistics'), wx.Bitmap(self.currentdir+"/data/report.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolStatistics, toolStatistics)
-		toolResetStatistics = self.toolbar2.AddTool(204, _('Reset'), wx.Bitmap(self.currentdir+"/data/openplotter-24.png"))
+		toolResetStatistics = self.toolbar2.AddTool(204, _('Reset'), wx.Bitmap(self.currentdir+"/data/refresh.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolResetStatistics, toolResetStatistics)
 
-
 		self.toolbar3 = wx.ToolBar(self.info, style=wx.TB_TEXT)
-		MPU9250 = self.toolbar3.AddTool(301, _('MPU-9250'), wx.Bitmap(self.currentdir+"/data/openplotter-24.png"))
+		MPU9250 = self.toolbar3.AddTool(301, _('Check IMU temperature'), wx.Bitmap(self.currentdir+"/data/temp.png"))
 		self.Bind(wx.EVT_TOOL, self.onMPU9250, MPU9250)
-		MS560702BA03 = self.toolbar3.AddTool(302, _('MS5607-02BA03'), wx.Bitmap(self.currentdir+"/data/openplotter-24.png"))
+		MS560702BA03 = self.toolbar3.AddTool(302, _('Check pressure'), wx.Bitmap(self.currentdir+"/data/press.png"))
 		self.Bind(wx.EVT_TOOL, self.onMS560702BA03, MS560702BA03)
-		Si7020A20 = self.toolbar3.AddTool(303, _('Si7020-A20'), wx.Bitmap(self.currentdir+"/data/openplotter-24.png"))
-		self.Bind(wx.EVT_TOOL, self.onSi7020A20, Si7020A20)
 
 		vbox = wx.BoxSizer(wx.VERTICAL)
 		vbox.AddSpacer(10)
@@ -153,12 +157,12 @@ class MyFrame(wx.Frame):
 		vbox.AddStretchSpacer(1)
 		self.info.SetSizer(vbox)
 
-	def OnToolCheck(self,e):
+	def OnToolCheck(self,e=0):
 		self.logger.Clear()
 		self.notebook.ChangeSelection(3)
 		self.logger.BeginBold()
 		try:
-			out = subprocess.check_output(['more','product'],cwd='/proc/device-tree/hat').decode()
+			out = subprocess.check_output(['more','product'],cwd='/proc/device-tree/hat').decode('utf-8')
 		except:
 			self.logger.BeginTextColour((130, 0, 0))
 			self.logger.WriteText(_('Moitessier HAT is not attached!\n'))
@@ -173,35 +177,59 @@ class MyFrame(wx.Frame):
 				self.logger.WriteText(_('Moitessier HAT is attached.\n'))
 				self.logger.EndTextColour()
 
+		try:
+			subprocess.check_output(['i2cdetect', '-y', '0']).decode('utf-8')
+			self.logger.BeginTextColour((130, 0, 0))
+			self.logger.WriteText(_('Your Raspberry Pi is too old!\n'))
+			self.logger.EndTextColour()
+		except:
+			try:
+				subprocess.check_output(['i2cdetect', '-y', '1']).decode('utf-8')
+				self.logger.BeginTextColour((0, 130, 0))
+				self.logger.WriteText(_('I2C is enabled.\n'))
+				self.logger.EndTextColour()
+			except:
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('I2C is disabled. Please enable I2C interface in Preferences -> Raspberry Pi configuration -> Interfaces.\n'))
+				self.logger.EndTextColour()
+
+		spidev = subprocess.check_output('lsmod').decode()
+		if 'spidev' in spidev:
+			self.logger.BeginTextColour((0, 130, 0))
+			self.logger.WriteText(_('SPI is enabled.\n'))
+			self.logger.EndTextColour()
+		else:
+			self.logger.BeginTextColour((130, 0, 0))
+			self.logger.WriteText(_('SPI is disabled. Please enable SPI interface in Preferences -> Raspberry Pi configuration -> Interfaces.\n'))
+			self.logger.EndTextColour()
+
 		if not os.path.isfile(self.conf.home+'/moitessier/app/moitessier_ctrl/moitessier_ctrl'):
 			self.logger.BeginTextColour((130, 0, 0))
 			self.logger.WriteText(_('Moitessier HAT package is not installed!\n'))
 			self.logger.EndTextColour()
+			self.logger.EndBold()
 		else:
 			self.logger.BeginTextColour((0, 130, 0))
 			self.logger.WriteText(_('Moitessier HAT package is installed.\n'))
 			self.logger.EndTextColour()
-			self.logger.EndBold()
-			self.logger.BeginTextColour((55, 55, 55))
 			package = subprocess.check_output(['dpkg','-s','moitessier']).decode()
-			self.logger.WriteText(package)
-			self.logger.EndTextColour()
-
 			kernel = subprocess.check_output(['uname','-r']).decode()
 			kernel = kernel.split('-')
 			kernel = kernel[0]
-			package = package.split('\n')
-			for i in package:
+			package2 = package.split('\n')
+			for i in package2:
 				if 'Version:' in i:
 					version = self.extract_value(i)
 					version = version.split('-')
 					version = version[2]
 			if kernel != version:
-				self.logger.BeginBold()
 				self.logger.BeginTextColour((130, 0, 0))
-				self.logger.WriteText(_('The installed package does not match the kernel version. Go to "Driver" tab to update the package.'))
+				self.logger.WriteText(_('The installed package does not match the kernel version, go to "Driver" tab to update it.\n'))
 				self.logger.EndTextColour()
-				self.logger.EndBold()
+			self.logger.EndBold()
+			self.logger.BeginTextColour((55, 55, 55))
+			self.logger.WriteText(package)
+			self.logger.EndTextColour()
 
 	def extract_value(self, data):
 		option, value = data.split(':')
@@ -247,16 +275,6 @@ class MyFrame(wx.Frame):
 		self.logger.BeginTextColour((55, 55, 55))
 		output = self.getData('ms5')
 		self.logger.WriteText(_('MS5607-02BA03 pressure and temperature: ')+output)
-		self.logger.WriteText(_('To get accurate readings, make sure the sensor is not being read by another application.'))
-		self.logger.EndTextColour()
-
-	def onSi7020A20(self, e):
-		self.logger.Clear()
-		self.notebook.ChangeSelection(3)
-		self.logger.BeginTextColour((55, 55, 55))
-		output = self.getData('si7')
-		if 'Firmware' in output: output = _('This sensor is not mounted on this HAT\n')
-		self.logger.WriteText(_('Si7020-A20 humidity: ')+output)
 		self.logger.WriteText(_('To get accurate readings, make sure the sensor is not being read by another application.'))
 		self.logger.EndTextColour()
 
@@ -432,8 +450,8 @@ class MyFrame(wx.Frame):
 		metamask_label = wx.StaticText(self.settings, -1, 'meta data')
 		afcRange_label = wx.StaticText(self.settings, -1, 'AFC range [Hz]')
 
-		self.rec1_freq1 = wx.SpinCtrl(self.settings, min=159000000, max=162025000, initial=161975000)
-		self.rec1_freq2 = wx.SpinCtrl(self.settings, min=159000000, max=162025000, initial=162025000)
+		self.rec1_freq1 = wx.SpinCtrl(self.settings, min=156000000, max=174000000, initial=161975000)
+		self.rec1_freq2 = wx.SpinCtrl(self.settings, min=156000000, max=174000000, initial=162025000)
 		self.rec1_metamask = wx.Choice(self.settings, choices=(_('none'),'RSSI'), style=wx.CB_READONLY)
 		self.rec1_metamask.SetSelection(0)
 		self.rec1_afcRange = wx.SpinCtrl(self.settings, min=500, max=2000, initial=1500)
@@ -489,9 +507,39 @@ class MyFrame(wx.Frame):
 
 		self.settings.SetSizer(vbox4)
 
+		self.readSettings()
+
+	def readSettings(self):
+		try:
+			settings = subprocess.check_output([self.conf.home+'/moitessier/app/moitessier_ctrl/moitessier_ctrl','/dev/moitessier.ctrl','1']).decode('utf-8')
+			settings = settings.replace('\t','')
+			settings = settings.split('\n')
+			for i in settings:
+				if 'enabled:' in i:
+					if self.extract_value(i) == '1': self.simulator.SetValue(True)
+					else: self.simulator.SetValue(False)
+				if 'interval:' in i:
+					self.interval.SetValue(int(self.extract_value(i)))
+				if 'mmsi:' in i:
+					data = self.extract_value(i)
+					data = data.split(' ')
+					self.mmsi1.SetValue(int(data[0])) 
+					self.mmsi2.SetValue(int(data[1]))
+				if 'channel frequency 1 [Hz]:' in i:
+					self.rec1_freq1.SetValue(int(self.extract_value(i)))
+				if 'channel frequency 2 [Hz]:' in i:
+					self.rec1_freq2.SetValue(int(self.extract_value(i)))
+				if 'meta data mask:' in i:
+					if self.extract_value(i) == '0x00': self.rec1_metamask.SetSelection(0)
+					else: self.rec1_metamask.SetSelection(1)
+				if 'afc range [Hz]:' in i and not 'default' in i:
+					self.rec1_afcRange.SetValue(int(self.extract_value(i)))
+		except:
+			self.ShowStatusBarRED(_('Failure reading HAT settings!'))
+
 	def on_defaults(self,e):
 		try:
-			tree = ET.parse(self.home+'/moitessier/app/moitessier_ctrl/default_config.xml')
+			tree = ET.parse(self.conf.home+'/moitessier/app/moitessier_ctrl/default_config.xml')
 			root = tree.getroot()
 			for item in root.iter("simulator"):
 				for subitem in item.iter("enabled"):
@@ -512,19 +560,13 @@ class MyFrame(wx.Frame):
 				for subitem in item.iter("afcRange"):
 					self.rec1_afcRange.SetValue(int(subitem.text)) 
 		except:
-			self.logger2.Clear()
-			self.logger2.BeginTextColour((255, 0, 0))
-			self.logger2.WriteText(_('Failure reading default_config.xml file!'))
-			self.logger2.EndTextColour()
+			self.ShowStatusBarRED(_('Failure reading default_config.xml file!'))
 		else:
-			self.logger2.Clear()
-			self.logger2.BeginTextColour((55, 55, 55))
-			self.logger2.WriteText(_('Defaults loaded. Apply changes.'))
-			self.logger2.EndTextColour()
+			self.ShowStatusBarBLACK(_('Defaults loaded. Apply changes'))
 
 	def OnToolApply(self,e):
 		try: 
-			tree = ET.parse(self.home+'/moitessier/app/moitessier_ctrl/config.xml')
+			tree = ET.parse(self.conf.home+'/moitessier/app/moitessier_ctrl/config.xml')
 			root = tree.getroot()
 			for item in root.iter("simulator"):
 				for subitem in item.iter("enabled"):
@@ -553,242 +595,351 @@ class MyFrame(wx.Frame):
 					else: subitem.text = '16'
 				for subitem in item.iter("afcRange"):
 					subitem.text = str(self.rec1_afcRange.GetValue())
-			tree.write(self.home+'/moitessier/app/moitessier_ctrl/config.xml',encoding='utf-8', xml_declaration=True)
-			subprocess.call([self.home+'/moitessier/app/moitessier_ctrl/moitessier_ctrl','/dev/moitessier.ctrl','5',self.home+'/moitessier/app/moitessier_ctrl/config.xml'])
-			self.logger2.Clear()
-			self.logger2.BeginTextColour((55, 55, 55))
-			self.logger2.WriteText(_('Changes applied.'))
-			self.logger2.EndTextColour()
+			tree.write(self.conf.home+'/moitessier/app/moitessier_ctrl/config.xml',encoding='utf-8', xml_declaration=True)
+			subprocess.call([self.conf.home+'/moitessier/app/moitessier_ctrl/moitessier_ctrl','/dev/moitessier.ctrl','5',self.conf.home+'/moitessier/app/moitessier_ctrl/config.xml'])
+			self.ShowStatusBarGREEN(_('Changes applied!'))
 		except: 
-			self.logger2.Clear()
-			self.logger2.BeginTextColour((255, 0, 0))
-			self.logger2.WriteText(_('Apply changes failed!'))
-			self.logger2.EndTextColour()
+			self.ShowStatusBarRED(_('Apply changes failed!'))
 
 	def OnToolCancel(self,e):
-		pass
-		'''
-		self.ShowStatusBarRED(_('Changes canceled'))
-		self.readMyapp()
-		self.readConnections()
-		self.printConnections()
-		'''
+		self.readSettings()
 
 	def OnToolCheckConf(self,e):
-		self.conf = Conf()
-		self.SK_settings = SK_settings(self.conf)
-		self.opencpnSettings = opencpnSettings()
-		self.logger4.Clear()
-
-		serialInst = self.conf.get('UDEV', 'Serialinst')
-		try: serialInst = eval(serialInst)
-		except: serialInst = {}
-		serialalias = ''
-		assignment = ''
-		device = ''
-		for alias in serialInst:
-			if serialInst[alias]['device'] == '/dev/moitessier.tty' and serialInst[alias]['data'] == 'NMEA 0183': 
-				serialalias = alias
-				assignment = serialInst[alias]['assignment']
-				device = self.SK_settings.check_device(alias)
-
-		pypilot = self.conf.get('PYPILOT', 'mode')
-		heading = self.conf.get('PYPILOT', 'translation_magnetic_h')
-		attitude = self.conf.get('PYPILOT', 'translation_attitude')
-
-		i2c = self.conf.get('I2C', 'sensors')
-		try: i2c = eval(i2c)
-		except: i2c = {}
-		pressure = ''
-		temperature = ''
-		for sensor in i2c:
-			if sensor[0] == 'MS5607-02BA03' and sensor[1] == '0x77':
-				pressure = sensor[2][0][0]
-				temperature = sensor[2][1][0]
-
-		XDRBaro = False
-		SKplugin = False
-		setting_file = self.home+'/.signalk/plugin-config-data/sk-to-nmea0183.json'
-		if os.path.isfile(setting_file):
-			with open(setting_file) as data_file:
-				data = ujson.load(data_file)
-			if 'enabled' in data: SKplugin = data['enabled']
-			if 'configuration' in data:
-				if 'XDRBaro' in data['configuration']: XDRBaro = data['configuration']['XDRBaro']
-
-		opencpnConnection = self.opencpnSettings.getConnectionState()
-
-		self.logger4.BeginTextColour((55, 55, 55))
-		self.logger4.BeginBold()
-		self.logger4.WriteText('AIS - GNSS')
-		self.logger4.EndBold()
-		self.logger4.Newline()
-		self.logger4.WriteText(_('Serial alias: '))
-		self.logger4.EndTextColour()
-		if serialalias:
-			self.logger4.BeginTextColour((0, 255, 0))
-			self.logger4.WriteText(serialalias)
+		self.logger.Clear()
+		self.notebook.ChangeSelection(3)
+		self.logger.BeginTextColour((55, 55, 55))
+		self.logger.BeginBold()
+		self.logger.WriteText('AIS - GNSS')
+		self.logger.EndBold()
+		self.logger.Newline()
+		if not self.platform.skPort:
+			self.logger.EndTextColour()
+			self.logger.BeginTextColour((130, 0, 0))
+			self.logger.WriteText(_('Please install openplotter-signalk-installer app'))
+			self.logger.EndTextColour()
+			self.logger.Newline()
 		else:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('none'))
-		self.logger4.EndTextColour()
-		self.logger4.Newline()
-		self.logger4.BeginTextColour((55, 55, 55))
-		self.logger4.WriteText(_('Assignment: '))
-		self.logger4.EndTextColour()
-		if not assignment:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('none'))
-		elif assignment != 'GPSD':
-			if assignment == '0': x = _('manual')
-			else: x = assignment
-			self.logger4.BeginTextColour((0, 255, 0))
-			self.logger4.WriteText(x)
-		else:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(assignment)
-		self.logger4.EndTextColour()
-		self.logger4.Newline()
-		self.logger4.BeginTextColour((55, 55, 55))
-		self.logger4.WriteText(_('Signal K connection status: '))
-		self.logger4.EndTextColour()
-		if not assignment:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('none'))
-		elif assignment == '0' or assignment == 'GPSD' or assignment == 'Signal K > OpenCPN':
-			if device == 'enabled':
-				self.logger4.BeginTextColour((0, 255, 0))
-				self.logger4.WriteText(_('enabled'))
-			elif device == 'disabled':
-				self.logger4.BeginTextColour((255, 0, 0))
-				self.logger4.WriteText(_('disabled'))
+			self.logger.WriteText(_('Connection: '))
+			self.logger.EndTextColour()
+			connection = ''
+			enabled = False
+			#check SK
+			try:
+				setting_file = self.platform.skDir+'/settings.json'
+				data = ''
+				with open(setting_file) as data_file:
+					data = ujson.load(data_file)
+				if 'pipedProviders' in data:
+					for i in data['pipedProviders']:
+						if i['pipeElements'][0]['options']['subOptions']['type']=='serial' and i['pipeElements'][0]['options']['subOptions']['device']=='/dev/moitessier.tty':
+							connection = _('Signal K connection ID = ')+i['id']
+							enabled = i['enabled']
+			except:pass
+			#TODO check pypilot-SK, kplex-SK... detect multiple connections
+			if connection:
+				self.logger.BeginTextColour((0, 130, 0))
+				self.logger.WriteText(connection)
+				if not enabled:
+					self.logger.BeginTextColour((130, 0, 0))
+					self.logger.WriteText(' | '+_('disabled'))
 			else:
-				self.logger4.BeginTextColour((255, 0, 0))
-				self.logger4.WriteText(_('connection does not exist'))
-		elif 'pypilot' in assignment:
-			if self.SK_settings.pypilot_enabled == True:
-				self.logger4.BeginTextColour((0, 255, 0))
-				self.logger4.WriteText(_('enabled'))
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('not connected'))
+			self.logger.EndTextColour()
+			self.logger.Newline()
+
+		#####################################
+
+			self.logger.BeginTextColour((55, 55, 55))
+			self.logger.Newline()
+			self.logger.BeginBold()
+			self.logger.WriteText(_('Compass - Trim - Heel'))
+			self.logger.EndBold()
+			self.logger.Newline()
+			if not self.platform.isInstalled('openplotter-pypilot'):
+				self.logger.EndTextColour()
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('Please install openplotter-pypilot app'))
+				self.logger.EndTextColour()
+				self.logger.Newline()
 			else:
-				self.logger4.BeginTextColour((255, 0, 0))
-				self.logger4.WriteText(_('disabled'))
-		else:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('none'))
-		self.logger4.EndTextColour()
+				self.logger.WriteText(_('Pypilot: '))
+				self.logger.EndTextColour()
+				pypilot = self.conf.get('PYPILOT', 'mode')
+				heading = self.conf.get('PYPILOT', 'heading')
+				pitch = self.conf.get('PYPILOT', 'pitch')
+				roll = self.conf.get('PYPILOT', 'roll')
+				pypilotconn2 = self.conf.get('PYPILOT', 'pypilotconn2')
+				if pypilot == '1' or pypilot == '2':
+					self.logger.BeginTextColour((0, 130, 0))
+					self.logger.WriteText(_('enabled'))
+				else:
+					self.logger.BeginTextColour((130, 0, 0))
+					self.logger.WriteText(_('disabled'))
+				self.logger.EndTextColour()
+				self.logger.Newline()
+				self.logger.BeginTextColour((55, 55, 55))
+				self.logger.WriteText(_('Heading: '))
+				self.logger.EndTextColour()
+				if pypilot != '0' and heading == '1':
+					self.logger.BeginTextColour((0, 130, 0))
+					self.logger.WriteText(_('enabled'))
+				else:
+					self.logger.BeginTextColour((130, 0, 0))
+					self.logger.WriteText(_('disabled'))
+				self.logger.EndTextColour()
+				self.logger.Newline()
+				self.logger.BeginTextColour((55, 55, 55))
+				self.logger.WriteText(_('Pitch: '))
+				self.logger.EndTextColour()
+				if pypilot != '0' and pitch == '1':
+					self.logger.BeginTextColour((0, 130, 0))
+					self.logger.WriteText(_('enabled'))
+				else:
+					self.logger.BeginTextColour((130, 0, 0))
+					self.logger.WriteText(_('disabled'))
+				self.logger.EndTextColour()
+				self.logger.Newline()
+				self.logger.BeginTextColour((55, 55, 55))
+				self.logger.WriteText(_('Roll: '))
+				self.logger.EndTextColour()
+				if pypilot != '0' and roll == '1':
+					self.logger.BeginTextColour((0, 130, 0))
+					self.logger.WriteText(_('enabled'))
+				else:
+					self.logger.BeginTextColour((130, 0, 0))
+					self.logger.WriteText(_('disabled'))
+				self.logger.EndTextColour()
+				if pypilot == '1':
+					self.logger.BeginTextColour((55, 55, 55))
+					self.logger.Newline()
+					self.logger.WriteText(_('Connection: '))
+					self.logger.EndTextColour()
+					connection = ''
+					enabled = False
+					if self.platform.skPort:
+						try:
+							setting_file = self.platform.skDir+'/settings.json'
+							data = ''
+							with open(setting_file) as data_file:
+								data = ujson.load(data_file)
+							if 'pipedProviders' in data:
+								for i in data['pipedProviders']:
+									if i['pipeElements'][0]['options']['subOptions']['type']=='udp' and i['pipeElements'][0]['options']['subOptions']['port']==pypilotconn2:
+										connection = _('Signal K connection ID = ')+i['id']
+										enabled = i['enabled']
+						except:pass
+					if connection:
+						self.logger.BeginTextColour((0, 130, 0))
+						self.logger.WriteText(connection)
+						if not enabled:
+							self.logger.BeginTextColour((130, 0, 0))
+							self.logger.WriteText(' | '+_('disabled'))
+					else:
+						self.logger.BeginTextColour((130, 0, 0))
+						self.logger.WriteText(_('not connected'))
+					self.logger.EndTextColour()
+					self.logger.Newline()
+				elif pypilot == '2':
+					self.logger.BeginTextColour((55, 55, 55))
+					self.logger.Newline()
+					self.logger.WriteText(_('Connection 1 (pitch and roll): '))
+					self.logger.EndTextColour()
+					connection1 = ''
+					connection2 = ''
+					enabled1 = False
+					enabled2 = False
+					if self.platform.skPort:
+						try:
+							setting_file = self.platform.skDir+'/settings.json'
+							data = ''
+							with open(setting_file) as data_file:
+								data = ujson.load(data_file)
+							if 'pipedProviders' in data:
+								for i in data['pipedProviders']:
+									if i['pipeElements'][0]['options']['subOptions']['type']=='udp' and i['pipeElements'][0]['options']['subOptions']['port']==pypilotconn2:
+										connection1 = _('Signal K connection ID = ')+i['id']
+										enabled1 = i['enabled']
+									elif i['pipeElements'][0]['options']['subOptions']['type']=='tcp' and i['pipeElements'][0]['options']['subOptions']['port']=='20220':
+										connection2 = _('Signal K connection ID = ')+i['id']
+										enabled2 = i['enabled']
+						except:pass
+					if connection1:
+						self.logger.BeginTextColour((0, 130, 0))
+						self.logger.WriteText(connection1)
+						if not enabled1:
+							self.logger.BeginTextColour((130, 0, 0))
+							self.logger.WriteText(' | '+_('disabled'))
+					else:
+						self.logger.BeginTextColour((130, 0, 0))
+						self.logger.WriteText(_('not connected'))
+					self.logger.EndTextColour()
+					self.logger.Newline()
+					self.logger.BeginTextColour((55, 55, 55))
+					self.logger.WriteText(_('Connection 2 (heading): '))
+					self.logger.EndTextColour()
+					if connection2:
+						self.logger.BeginTextColour((0, 130, 0))
+						self.logger.WriteText(connection2)
+						if not enabled2:
+							self.logger.BeginTextColour((130, 0, 0))
+							self.logger.WriteText(' | '+_('disabled'))
+					else:
+						self.logger.BeginTextColour((130, 0, 0))
+						self.logger.WriteText(_('not connected'))
+					self.logger.EndTextColour()
+					self.logger.Newline()
 
-		self.logger4.BeginTextColour((55, 55, 55))
-		self.logger4.Newline()
-		self.logger4.BeginBold()
-		self.logger4.WriteText(_('Compass - Heel - Trim'))
-		self.logger4.EndBold()
-		self.logger4.Newline()
-		self.logger4.WriteText(_('Pypilot status: '))
-		self.logger4.EndTextColour()
-		if pypilot == 'basic autopilot' or pypilot == 'imu':
-			self.logger4.BeginTextColour((0, 255, 0))
-			self.logger4.WriteText(_('enabled'))
-		else:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('disabled'))
-		self.logger4.EndTextColour()
-		self.logger4.Newline()
-		self.logger4.BeginTextColour((55, 55, 55))
-		self.logger4.WriteText(_('Heading: '))
-		self.logger4.EndTextColour()
-		if pypilot != 'disabled' and heading == '1':
-			self.logger4.BeginTextColour((0, 255, 0))
-			self.logger4.WriteText(_('enabled'))
-		else:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('disabled'))
-		self.logger4.EndTextColour()
-		self.logger4.Newline()
-		self.logger4.BeginTextColour((55, 55, 55))
-		self.logger4.WriteText(_('Pitch, Roll: '))
-		self.logger4.EndTextColour()
-		if pypilot != 'disabled' and attitude == '1':
-			self.logger4.BeginTextColour((0, 255, 0))
-			self.logger4.WriteText(_('enabled'))
-		else:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('disabled'))
-		self.logger4.EndTextColour()
+		###################################
 
-		self.logger4.Newline()
-		self.logger4.BeginTextColour((55, 55, 55))
-		self.logger4.BeginBold()
-		self.logger4.WriteText(_('Pressure - Temperature'))
-		self.logger4.EndBold()
-		self.logger4.Newline()
-		self.logger4.WriteText(_('I2C - Signal K key for pressure: '))
-		self.logger4.EndTextColour()
-		if pressure:
-			self.logger4.BeginTextColour((0, 255, 0))
-			self.logger4.WriteText(pressure)
-		else:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('none'))
-		self.logger4.EndTextColour()
-		self.logger4.Newline()
-		self.logger4.BeginTextColour((55, 55, 55))
-		self.logger4.WriteText(_('I2C - Signal K key for temperature: '))
-		self.logger4.EndTextColour()
-		if temperature:
-			self.logger4.BeginTextColour((0, 255, 0))
-			self.logger4.WriteText(temperature)
-		else:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('none'))
-		self.logger4.EndTextColour()
-		self.logger4.Newline()
-		self.logger4.BeginTextColour((55, 55, 55))
-		self.logger4.WriteText(_('Signal K to NMEA 0183 plugin: '))
-		self.logger4.EndTextColour()
-		if SKplugin:
-			self.logger4.BeginTextColour((0, 255, 0))
-			self.logger4.WriteText(_('enabled'))
-		else:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('disabled'))
-		self.logger4.EndTextColour()
-		self.logger4.Newline()
-		self.logger4.BeginTextColour((55, 55, 55))
-		self.logger4.WriteText(_('XDR (Barometer) conversion: '))
-		self.logger4.EndTextColour()
-		if SKplugin and XDRBaro:
-			self.logger4.BeginTextColour((0, 255, 0))
-			self.logger4.WriteText(_('enabled'))
-		else:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('disabled'))
-		self.logger4.EndTextColour()
+			self.logger.Newline()
+			self.logger.BeginTextColour((55, 55, 55))
+			self.logger.BeginBold()
+			self.logger.WriteText(_('Pressure - Temperature'))
+			self.logger.EndBold()
+			self.logger.Newline()
+			if not self.platform.isInstalled('openplotter-i2c'):
+				self.logger.EndTextColour()
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('Please install openplotter-i2c app'))
+				self.logger.EndTextColour()
+				self.logger.Newline()
+			else:
+				self.logger.WriteText(_('I2C - Signal K key for pressure: '))
+				self.logger.EndTextColour()
+				i2c = self.conf.get('I2C', 'sensors')
+				i2cconn1 = self.conf.get('I2C', 'i2cconn1')
+				try: i2c = eval(i2c)
+				except: i2c = {}
+				pressure = ''
+				temperature = ''
+				for sensor in i2c:
+					if sensor[0] == 'MS5607-02BA03' and sensor[1] == '0x77':
+						pressure = sensor[2][0][0]
+						temperature = sensor[2][1][0]
+				if pressure:
+					self.logger.BeginTextColour((0, 130, 0))
+					self.logger.WriteText(pressure)
+				else:
+					self.logger.BeginTextColour((130, 0, 0))
+					self.logger.WriteText(_('none'))
+				self.logger.EndTextColour()
+				self.logger.Newline()
+				self.logger.BeginTextColour((55, 55, 55))
+				self.logger.WriteText(_('I2C - Signal K key for temperature: '))
+				self.logger.EndTextColour()
+				if temperature:
+					self.logger.BeginTextColour((0, 130, 0))
+					self.logger.WriteText(temperature)
+				else:
+					self.logger.BeginTextColour((130, 0, 0))
+					self.logger.WriteText(_('none'))
+				self.logger.EndTextColour()
+				self.logger.BeginTextColour((55, 55, 55))
+				self.logger.Newline()
+				self.logger.WriteText(_('Connection: '))
+				self.logger.EndTextColour()
+				connection = ''
+				enabled = False
+				if self.platform.skPort:
+					try:
+						setting_file = self.platform.skDir+'/settings.json'
+						data = ''
+						with open(setting_file) as data_file:
+							data = ujson.load(data_file)
+						if 'pipedProviders' in data:
+							for i in data['pipedProviders']:
+								if i['pipeElements'][0]['options']['subOptions']['type']=='udp' and i['pipeElements'][0]['options']['subOptions']['port']==i2cconn1:
+									connection = _('Signal K connection ID = ')+i['id']
+									enabled = i['enabled']
+					except:pass
+				if connection:
+					self.logger.BeginTextColour((0, 130, 0))
+					self.logger.WriteText(connection)
+					if not enabled:
+						self.logger.BeginTextColour((130, 0, 0))
+						self.logger.WriteText(' | '+_('disabled'))
+				else:
+					self.logger.BeginTextColour((130, 0, 0))
+					self.logger.WriteText(_('not connected'))
+				self.logger.EndTextColour()
+				self.logger.Newline()
 
-		self.logger4.Newline()
-		self.logger4.BeginTextColour((55, 55, 55))
-		self.logger4.BeginBold()
-		self.logger4.WriteText(_('OpenCPN'))
-		self.logger4.EndBold()
-		self.logger4.Newline()
-		self.logger4.WriteText(_('Signal K connection: '))
-		self.logger4.EndTextColour()
-		if opencpnConnection:
-			self.logger4.BeginTextColour((0, 255, 0))
-			self.logger4.WriteText(_('TCP localhost 10110 input'))
-		else:
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('missing TCP localhost 10110 input'))
-		self.logger4.EndTextColour()
-		self.logger4.Newline()
-		self.logger4.BeginTextColour((55, 55, 55))
-		self.logger4.WriteText(_('Status: '))
-		self.logger4.EndTextColour()
-		if not opencpnConnection or opencpnConnection == 'disabled':
-			self.logger4.BeginTextColour((255, 0, 0))
-			self.logger4.WriteText(_('disabled'))
-		if opencpnConnection == 'enabled':
-			self.logger4.BeginTextColour((0, 255, 0))
-			self.logger4.WriteText(_('enabled'))
+		###################################
+		
+			self.logger.Newline()
+			self.logger.BeginTextColour((55, 55, 55))
+			self.logger.BeginBold()
+			self.logger.WriteText(_('Signal K to NMEA 0183 conversion'))
+			self.logger.EndBold()
+			self.logger.Newline()
+			self.logger.WriteText(_('Signal K to NMEA 0183 plugin: '))
+			self.logger.EndTextColour()
+			XDRBaro = False
+			XDRNA = False
+			HDM = False
+			SKplugin = False
+			setting_file = self.platform.skDir+'/plugin-config-data/sk-to-nmea0183.json'
+			if os.path.isfile(setting_file):
+				with open(setting_file) as data_file:
+					data = ujson.load(data_file)
+				if 'enabled' in data: SKplugin = data['enabled']
+				if 'configuration' in data:
+					if 'XDRBaro' in data['configuration']: XDRBaro = data['configuration']['XDRBaro']
+					if 'XDRNA' in data['configuration']: XDRNA = data['configuration']['XDRNA']
+					if 'HDM' in data['configuration']: HDM = data['configuration']['HDM']
+			if SKplugin:
+				self.logger.BeginTextColour((0, 130, 0))
+				self.logger.WriteText(_('enabled'))
+			else:
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('disabled'))
+			self.logger.EndTextColour()
+			self.logger.Newline()
+			self.logger.BeginTextColour((55, 55, 55))
+			self.logger.WriteText(_('XDR (Barometer) conversion: '))
+			self.logger.EndTextColour()
+			if SKplugin and XDRBaro:
+				self.logger.BeginTextColour((0, 130, 0))
+				self.logger.WriteText(_('enabled'))
+			else:
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('disabled'))
+			self.logger.EndTextColour()
+			self.logger.Newline()
+			self.logger.BeginTextColour((55, 55, 55))
+			self.logger.WriteText(_('XDR (Pitch and Roll) conversion: '))
+			self.logger.EndTextColour()
+			if SKplugin and XDRNA:
+				self.logger.BeginTextColour((0, 130, 0))
+				self.logger.WriteText(_('enabled'))
+			else:
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('disabled'))
+			self.logger.EndTextColour()
+			self.logger.Newline()
+			pypilot = self.conf.get('PYPILOT', 'mode')
+			if pypilot == '1':
+				self.logger.BeginTextColour((55, 55, 55))
+				self.logger.WriteText(_('HDM (Heading Magnetic) conversion: '))
+				self.logger.EndTextColour()
+				if SKplugin and HDM:
+					self.logger.BeginTextColour((0, 130, 0))
+					self.logger.WriteText(_('enabled'))
+				else:
+					self.logger.BeginTextColour((130, 0, 0))
+					self.logger.WriteText(_('disabled'))
+				self.logger.EndTextColour()
+				self.logger.Newline()
+			if pypilot == '2' and SKplugin and HDM:
+				self.logger.BeginTextColour((55, 55, 55))
+				self.logger.WriteText(_('HDM (Heading Magnetic) conversion: '))
+				self.logger.EndTextColour()
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('Duplicated. Please disable HDM conversion'))
+				self.logger.EndTextColour()
+				self.logger.Newline()
+
 
 ################################################################################
 
