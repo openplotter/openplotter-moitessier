@@ -6,23 +6,31 @@ OpenPlotter app to manage the Moitessier HAT
 
 #### For production
 
-Install [openplotter-settings](https://github.com/openplotter/openplotter-settings) and just install this app from *OpenPlotter Apps* tab.
+Install [openplotter-settings](https://github.com/openplotter/openplotter-settings) for **production** and just install this app from *OpenPlotter Apps* tab.
 
 #### For development
 
-Install OpenPlotter dependencies:
-
-`sudo apt install openplotter-settings`
+Install [openplotter-settings](https://github.com/openplotter/openplotter-settings) for **development**.
 
 Clone the repository:
 
 `git clone https://github.com/openplotter/openplotter-moitessier`
 
-Make your changes and test them locally:
+Install:
 
-`sudo python3 setup.py install`
+```
+cd openplotter-moitessier
+sudo python3 setup.py install
+```
+Run post-installation script:
 
-Pull request your changes to github and we will check and add them to the next version of the [Debian package](https://launchpad.net/~openplotter/+archive/ubuntu/openplotter/).
+`sudo moitessierPostInstall`
+
+Run:
+
+`openplotter-moitessier`
+
+Make your changes and repeat installation and post-installation steps to test. Pull request your changes to github and we will check and add them to the next version of the [Debian package](https://launchpad.net/~openplotter/+archive/ubuntu/openplotter/).
 
 ### Documentation
 

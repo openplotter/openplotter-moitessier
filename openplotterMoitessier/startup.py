@@ -15,27 +15,19 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import time, os, subprocess
+import os, subprocess, sys
 from openplotterSettings import language
 
 
 class Start():
 	def __init__(self, conf, currentLanguage):
-		self.conf = conf
-		currentdir = os.path.dirname(__file__)
-		language.Language(currentdir,'openplotter-moitessier',currentLanguage)
-
 		self.initialMessage = ''
-
 
 	def start(self):
 		green = '' 
 		black = '' 
 		red = '' 
 
-		
-
-		time.sleep(2) 
 		return {'green': green,'black': black,'red': red}
 
 
@@ -53,18 +45,18 @@ class Check():
 		red = '' 
 
 		try:
-			out = subprocess.check_output(['more','product'],cwd='/proc/device-tree/hat').decode('utf-8')
+			out = subprocess.check_output(['more','product'],cwd='/proc/device-tree/hat').decode(sys.stdin.encoding)
 		except: black =_('not attached')
 		else:
 			if not 'Moitessier' in out: black =_('not attached')
 			else: green =_('attached')
 
 		try:
-			subprocess.check_output(['i2cdetect', '-y', '0']).decode('utf-8')
+			subprocess.check_output(['i2cdetect', '-y', '0']).decode(sys.stdin.encoding)
 			red = _('Your Raspberry Pi is too old!')
 		except:
 			try:
-				subprocess.check_output(['i2cdetect', '-y', '1']).decode('utf-8')
+				subprocess.check_output(['i2cdetect', '-y', '1']).decode(sys.stdin.encoding)
 				txt = _('I2C enabled')
 				if not black: black = txt
 				else: black += ' | '+txt
@@ -73,7 +65,7 @@ class Check():
 				if not red: red = txt
 				else: red += '\n'+txt
 
-		spidev = subprocess.check_output('lsmod').decode()
+		spidev = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
 		if 'spidev' in spidev:
 			txt = _('SPI enabled')
 			if not black: black = txt
@@ -83,7 +75,8 @@ class Check():
 			if not red: red = txt
 			else: red += '\n'+txt
 
-		if not os.path.isfile(self.conf.home+'/moitessier/app/moitessier_ctrl/moitessier_ctrl'):
+		modulesPath = self.conf.home+'/moitessier/modules'
+		if not os.path.exists(modulesPath):
 			txt = _('Moitessier HAT driver is not installed.')
 			if not red: red = txt
 			else: red += '\n'+txt
@@ -92,24 +85,15 @@ class Check():
 			if not black: black = txt
 			else: black += ' | '+txt
 
-			package = subprocess.check_output(['dpkg','-s','moitessier']).decode('utf-8')
-			kernel = subprocess.check_output(['uname','-r']).decode('utf-8')
-			kernel = kernel.split('-')
-			kernel = kernel[0]
-			package2 = package.split('\n')
-			for i in package2:
-				if 'Version:' in i:
-					version = self.extract_value(i)
-					version = version.split('-')
-					version = version[2]
-			if kernel != version:
-				txt = _('The installed package does not match the kernel version, go to OpenPlotter Moitessier HAT app to update it.')
+			packages = os.listdir(modulesPath)
+			kernel = subprocess.check_output(['uname','-r']).decode(sys.stdin.encoding)
+			kernel = kernel.replace('\n','')
+			supported = False
+			for i in packages:
+				if 'moitessier_'+kernel+'.ko' == i: supported = True
+			if not supported:
+				txt = _('The installed package does not support the current kernel version, go to Moitessier HAT app to update it.')
 				if not red: red = txt
 				else: red += '\n'+txt
 
 		return {'green': green,'black': black,'red': red}
-
-	def extract_value(self, data):
-		option, value = data.split(':')
-		value = value.strip()
-		return value
