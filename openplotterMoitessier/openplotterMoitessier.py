@@ -85,6 +85,12 @@ class MyFrame(wx.Frame):
 		self.pageSettings()
 		self.pageOutput()
 
+		try: subprocess.check_output(['i2cdetect', '-y', '1']).decode(sys.stdin.encoding)
+		except: self.button_install.Disable()
+
+		spidev = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
+		if not 'spidev' in spidev: self.button_install.Disable()
+
 		maxi = self.conf.get('GENERAL', 'maximize')
 		if maxi == '1': self.Maximize()
 		
@@ -229,14 +235,10 @@ class MyFrame(wx.Frame):
 				if 'moitessier_'+kernel+'.ko' == i: supported = True
 			if not supported:
 				self.logger.BeginTextColour((130, 0, 0))
-				self.logger.WriteText(_('The installed package does not support the current kernel version, go to "Driver" tab to update it.\n'))
+				self.logger.WriteText(_('The installed package does not support the current kernel version, go to "Drivers" tab to update it.\n'))
 				self.logger.EndTextColour()
 			self.logger.EndBold()
 			self.logger.BeginTextColour((55, 55, 55))
-			self.logger.WriteText(_('Supported kernels')+' (Raspberry 3: v7+ | Raspberry 4: v7l+):\n')
-			self.logger.WriteText("\n".join(packages))
-			self.logger.Newline()
-			self.logger.Newline()
 			self.logger.WriteText(driver)
 			self.logger.EndTextColour()
 
@@ -325,19 +327,48 @@ class MyFrame(wx.Frame):
 
 	def pageDrivers(self):
 		kernel_box = wx.StaticBox(self.drivers, -1, _(' Current kernel version '))
-
 		kernel_label = wx.StaticText(self.drivers, -1)
-		kernel = subprocess.check_output(['uname','-a']).decode(sys.stdin.encoding)
-		kernel_label.SetLabel(kernel)
+		kernel = subprocess.check_output(['uname','-r']).decode(sys.stdin.encoding)
+		kernel = kernel.replace('\n','')
+		kernel_label.SetLabel(kernel+' (v7+ = Raspberry 3, v7l+ = Raspberry 4)')
+
+		supported_box = wx.StaticBox(self.drivers, -1, _(' Supported versions '))
+		supported = rt.RichTextCtrl(self.drivers, style=wx.TE_MULTILINE|wx.TE_READONLY|wx.TE_DONTWRAP|wx.LC_SORT_ASCENDING)
+		supported.SetMargins((10,10))
+		modulesPath = self.conf.home+'/moitessier/modules'
+		if os.path.exists(modulesPath):
+			packages = os.listdir(modulesPath)
+			packages.sort()
+			exists = False
+			for i in packages:
+				if 'moitessier_'+kernel+'.ko' == i: 
+					exists = True
+					supported.BeginTextColour((0, 130, 0))
+				else:
+					supported.BeginTextColour((55, 55, 55))
+				supported.WriteText(i)
+				supported.EndTextColour()
+				supported.Newline()
+			if not exists:
+				supported.BeginTextColour((130, 0, 0))
+				supported.WriteText(_('The current package does not support the current kernel. Try to update the package. If you do not find a suitable package contact us at https://rooco.eu'))
+				supported.EndTextColour()
+			supported.ShowPosition(supported.GetLastPosition())
+		else:
+			supported.BeginTextColour((130, 0, 0))
+			supported.WriteText(_('Moitessier HAT package is not installed, please install it.'))
+			supported.EndTextColour()
 
 		packages_box = wx.StaticBox(self.drivers, -1, _(' Available packages '))
-
 		self.packages_list = []
 		self.packages_select = wx.Choice(self.drivers, choices=self.packages_list, style=wx.CB_READONLY)
 		self.readAvailable()
 
-		button_install = wx.Button(self.drivers, label=_('Install'))
-		self.Bind(wx.EVT_BUTTON, self.on_install, button_install)
+		self.button_install = wx.Button(self.drivers, label=_('Install'))
+		self.Bind(wx.EVT_BUTTON, self.on_install, self.button_install)
+
+		self.button_uninstall = wx.Button(self.drivers, label=_('Uninstall'))
+		self.Bind(wx.EVT_BUTTON, self.on_uninstall, self.button_uninstall)
 
 		downloadB = wx.Button(self.drivers, label=_('Download'))
 		self.Bind(wx.EVT_BUTTON, self.onDownload, downloadB)
@@ -349,46 +380,51 @@ class MyFrame(wx.Frame):
 		v_kernel_box.AddSpacer(5)
 		v_kernel_box.Add(kernel_label, 0, wx.ALL | wx.EXPAND, 10)
 
-		h_packages_box = wx.StaticBoxSizer(packages_box, wx.HORIZONTAL)
-		h_packages_box.Add(self.packages_select, 1, wx.ALL | wx.EXPAND, 5)
-		h_packages_box.Add(button_install, 0, wx.ALL | wx.EXPAND, 5)
-		h_packages_box.Add(downloadB, 0, wx.ALL | wx.EXPAND, 5)
-		h_packages_box.Add(drivers, 0, wx.ALL | wx.EXPAND, 5)
+		v_supported = wx.StaticBoxSizer(supported_box, wx.VERTICAL)
+		v_supported.Add(supported, 1, wx.ALL | wx.EXPAND, 5)
 
-		update_final = wx.BoxSizer(wx.VERTICAL)
-		update_final.Add(v_kernel_box, 0, wx.ALL | wx.EXPAND, 5)
-		update_final.Add(h_packages_box, 0, wx.ALL | wx.EXPAND, 5)
-		update_final.AddStretchSpacer(1)
+		left = wx.BoxSizer(wx.VERTICAL)
+		left.Add(v_kernel_box, 0, wx.EXPAND, 0)
+		left.Add(v_supported, 1, wx.UP | wx.EXPAND, 10)
+
+		h_packages_but1 = wx.BoxSizer(wx.HORIZONTAL)
+		h_packages_but1.Add(downloadB, 1, wx.ALL | wx.EXPAND, 5)
+		h_packages_but1.Add(drivers, 1, wx.ALL | wx.EXPAND, 5)
+
+		h_packages_but2 = wx.BoxSizer(wx.HORIZONTAL)
+		h_packages_but2.Add(self.button_install, 1, wx.ALL | wx.EXPAND, 5)
+		h_packages_but2.Add(self.button_uninstall, 1, wx.ALL | wx.EXPAND, 5)
+
+		right = wx.StaticBoxSizer(packages_box, wx.VERTICAL)
+		right.Add(h_packages_but1, 0, wx.ALL | wx.EXPAND, 5)
+		right.Add(self.packages_select, 0, wx.ALL | wx.EXPAND, 5)
+		right.Add(h_packages_but2, 0, wx.ALL | wx.EXPAND, 5)
+
+		update_final = wx.BoxSizer(wx.HORIZONTAL)
+		update_final.Add(left, 1, wx.ALL | wx.EXPAND, 5)
+		update_final.Add(right, 1, wx.ALL | wx.EXPAND, 5)
 
 		self.drivers.SetSizer(update_final)
 
 	def readAvailable(self):
 		self.packages_select.Clear()
 		self.packages_list = []
-		kernel = subprocess.check_output(['uname','-r']).decode(sys.stdin.encoding)
-		kernel = kernel.split('.')
-		kernelA = int(kernel[0])
-		kernelB = int(kernel[1])
-		kernelC = kernel[2].split('-')
-		kernelC = int(kernelC[0])
-		tmp = os.listdir(self.driversFolder)
-		for i in tmp:
-			package = i.split('_')
-			package = package[1]
-			package = package.split('.')
-			packageA = int(package[0])
-			packageB = int(package[1])
-			packageC = int(package[2])
-			if packageA >= kernelA:
-				if packageB >= kernelB:
-					if packageC >= kernelC: self.packages_list.append(i)
+		if os.path.exists(self.driversFolder):
+			tmp = os.listdir(self.driversFolder)
+			for i in tmp:
+				self.packages_list.append(i)
+			self.packages_list.sort()
 		self.packages_select.AppendItems(self.packages_list)
-		if len(self.packages_list)>0: self.packages_select.SetSelection(0)
+		if len(self.packages_list)>0: self.packages_select.SetSelection(len(self.packages_list)-1)
 
 	def on_install(self,e):
 		if self.packages_select.GetStringSelection() == '':
 			self.ShowStatusBarYELLOW(_('Select a package to install.'))
 		else:
+			subprocess.call([self.platform.admin, 'systemctl', 'stop', 'signalk.service'])
+			subprocess.call([self.platform.admin, 'systemctl', 'stop', 'signalk.socket'])
+			subprocess.check_output([self.platform.admin, 'systemctl', 'stop', 'pypilot_boatimu']).decode(sys.stdin.encoding)
+			subprocess.check_output([self.platform.admin, 'systemctl', 'stop', 'pypilot']).decode(sys.stdin.encoding)
 			self.ShowStatusBarYELLOW(_('Updating Moitessier Hat modules and firmware...'))
 			self.logger.Clear()
 			self.notebook.ChangeSelection(3)
@@ -402,22 +438,32 @@ class MyFrame(wx.Frame):
 					self.ShowStatusBarYELLOW(_('Installing package data, please wait... ')+line)
 					self.logger.ShowPosition(self.logger.GetLastPosition())
 			self.logger.EndTextColour()
-			
+
+	def on_uninstall(self,e):
+		self.logger.Clear()
+		self.notebook.ChangeSelection(3)
+		self.logger.EndBold()
+		self.logger.BeginTextColour((55, 55, 55))
+		command = self.platform.admin+' dpkg -r moitessier'
+		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
+		for line in popen.stdout:
+			if not 'Warning' in line and not 'WARNING' in line:
+				self.logger.WriteText(line)
+				self.ShowStatusBarYELLOW(_('Removing Moitessier Hat drivers, please wait... ')+line)
+				self.logger.ShowPosition(self.logger.GetLastPosition())
+		self.logger.EndTextColour()
+		self.ShowStatusBarYELLOW(_('Moitessier Hat drivers removed.'))
 
 	def onDownload(self,e):
 		kernel = subprocess.check_output(['uname','-r']).decode(sys.stdin.encoding)
 		kernel = kernel.split('-')
 		kernel = kernel[0]
-		file = 'moitessier_'+kernel+'_armhf.deb'
-		self.ShowStatusBarYELLOW(_('Searching file ')+file+' ...')
-		if os.path.isfile(self.driversFolder+'/'+file):
-			self.ShowStatusBarBLACK(_('This file already exists!'))
-		else:
-			try:
-				out = subprocess.check_output(['wget','https://get.rooco.tech/moitessier/buster/release/'+kernel+'/latest/'+file, '-P', self.driversFolder]).decode(sys.stdin.encoding)
-				self.ShowStatusBarGREEN(_('File downloaded!'))
-			except:
-				self.ShowStatusBarRED(_('File not found!'))
+		self.ShowStatusBarYELLOW(_('Searching package ')+kernel+(' ...'))
+		try:
+			out = subprocess.check_output(['wget', '-r', '-l1', '-np', '-nd', '-A', '.deb', '-N', 'https://get.rooco.tech/moitessier/buster/release/'+kernel+'/latest/'],cwd=self.driversFolder).decode(sys.stdin.encoding)
+			self.ShowStatusBarGREEN(_('Package downloaded!'))
+		except:
+			self.ShowStatusBarRED(_('Package not found!'))
 		self.readAvailable()
 
 	def onDrivers(self, e):
