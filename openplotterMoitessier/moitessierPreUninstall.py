@@ -37,6 +37,21 @@ def main():
 	print(_('Uninstalling drivers...'))
 	try:
 		subprocess.call(['dpkg', '-r', 'moitessier'])
+
+		file = open('/boot/config.txt', 'r')
+		file1 = open('config.txt', 'w')
+		exists = False
+		while True:
+			line = file.readline()
+			if not line: break
+			if 'dtoverlay=i2c-gpio,i2c_gpio_sda=2,i2c_gpio_scl=3,bus=3' in line: pass
+			else: file1.write(line)
+		file.close()
+		file1.close()
+		if os.system('diff config.txt /boot/config.txt > /dev/null'):
+			os.system('mv config.txt /boot')
+		else: os.system('rm -f config.txt')
+
 		print(_('DONE'))
 	except Exception as e: print(_('FAILED: ')+str(e))
 

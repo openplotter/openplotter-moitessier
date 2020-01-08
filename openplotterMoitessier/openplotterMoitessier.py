@@ -452,6 +452,21 @@ class MyFrame(wx.Frame):
 				self.ShowStatusBarYELLOW(_('Removing Moitessier Hat drivers, please wait... ')+line)
 				self.logger.ShowPosition(self.logger.GetLastPosition())
 		self.logger.EndTextColour()
+
+		file = open('/boot/config.txt', 'r')
+		file1 = open('config.txt', 'w')
+		exists = False
+		while True:
+			line = file.readline()
+			if not line: break
+			if 'dtoverlay=i2c-gpio,i2c_gpio_sda=2,i2c_gpio_scl=3,bus=3' in line: pass
+			else: file1.write(line)
+		file.close()
+		file1.close()
+		if os.system('diff config.txt /boot/config.txt > /dev/null'):
+			os.system(self.platform.admin+' mv config.txt /boot')
+		else: os.system(self.platform.admin+' rm -f config.txt')
+
 		self.ShowStatusBarYELLOW(_('Moitessier Hat drivers removed.'))
 
 	def onDownload(self,e):
