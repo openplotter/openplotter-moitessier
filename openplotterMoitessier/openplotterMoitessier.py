@@ -741,15 +741,16 @@ class MyFrame(wx.Frame):
 		XDRNA = False
 		HDM = False
 		SKplugin = False
-		setting_file = self.platform.skDir+'/plugin-config-data/sk-to-nmea0183.json'
-		if os.path.isfile(setting_file):
-			with open(setting_file) as data_file:
-				data = ujson.load(data_file)
-			if 'enabled' in data: SKplugin = data['enabled']
-			if 'configuration' in data:
-				if 'XDRBaro' in data['configuration']: XDRBaro = data['configuration']['XDRBaro']
-				if 'XDRNA' in data['configuration']: XDRNA = data['configuration']['XDRNA']
-				if 'HDM' in data['configuration']: HDM = data['configuration']['HDM']
+		if self.platform.skDir:
+			setting_file = self.platform.skDir+'/plugin-config-data/sk-to-nmea0183.json'
+			if os.path.isfile(setting_file):
+				with open(setting_file) as data_file:
+					data = ujson.load(data_file)
+				if 'enabled' in data: SKplugin = data['enabled']
+				if 'configuration' in data:
+					if 'XDRBaro' in data['configuration']: XDRBaro = data['configuration']['XDRBaro']
+					if 'XDRNA' in data['configuration']: XDRNA = data['configuration']['XDRNA']
+					if 'HDM' in data['configuration']: HDM = data['configuration']['HDM']
 
 		self.logger.BeginTextColour((55, 55, 55))
 		self.logger.Newline()
@@ -757,6 +758,8 @@ class MyFrame(wx.Frame):
 		self.logger.WriteText(_('Compass - Trim - Heel'))
 		self.logger.EndBold()
 		self.logger.Newline()
+		pypilot_boatimu = False
+		pypilot = False
 		if not self.platform.isInstalled('openplotter-pypilot'):
 			self.logger.EndTextColour()
 			self.logger.BeginTextColour((130, 0, 0))
@@ -769,11 +772,11 @@ class MyFrame(wx.Frame):
 			try:
 				subprocess.check_output(['systemctl', 'is-enabled', 'pypilot_boatimu']).decode(sys.stdin.encoding)
 				pypilot_boatimu = True
-			except: pypilot_boatimu = False
+			except: pass
 			try:
 				subprocess.check_output(['systemctl', 'is-enabled', 'pypilot']).decode(sys.stdin.encoding)
 				pypilot = True
-			except: pypilot = False
+			except: pass
 
 			if pypilot_boatimu or pypilot:
 				self.logger.BeginTextColour((0, 130, 0))
