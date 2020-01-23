@@ -88,8 +88,8 @@ class MyFrame(wx.Frame):
 		try: subprocess.check_output(['i2cdetect', '-y', '1']).decode(sys.stdin.encoding)
 		except: self.button_install.Disable()
 
-		spidev = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
-		if not 'spidev' in spidev: self.button_install.Disable()
+		spi_bcm2835 = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
+		if not 'spi_bcm2835' in spi_bcm2835: self.button_install.Disable()
 
 		maxi = self.conf.get('GENERAL', 'maximize')
 		if maxi == '1': self.Maximize()
@@ -205,8 +205,8 @@ class MyFrame(wx.Frame):
 				self.logger.WriteText(_('I2C is disabled. Please enable I2C interface in Preferences -> Raspberry Pi configuration -> Interfaces.\n'))
 				self.logger.EndTextColour()
 
-		spidev = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
-		if 'spidev' in spidev:
+		spi_bcm2835 = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
+		if 'spi_bcm2835' in spi_bcm2835:
 			self.logger.BeginTextColour((0, 130, 0))
 			self.logger.WriteText(_('SPI is enabled.\n'))
 			self.logger.EndTextColour()
