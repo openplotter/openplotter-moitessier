@@ -421,53 +421,63 @@ class MyFrame(wx.Frame):
 		if self.packages_select.GetStringSelection() == '':
 			self.ShowStatusBarYELLOW(_('Select a package to install.'))
 		else:
-			subprocess.call([self.platform.admin, 'systemctl', 'stop', 'signalk.service'])
-			subprocess.call([self.platform.admin, 'systemctl', 'stop', 'signalk.socket'])
-			subprocess.check_output([self.platform.admin, 'systemctl', 'stop', 'pypilot_boatimu']).decode(sys.stdin.encoding)
-			subprocess.check_output([self.platform.admin, 'systemctl', 'stop', 'pypilot']).decode(sys.stdin.encoding)
-			self.ShowStatusBarYELLOW(_('Updating Moitessier Hat modules and firmware...'))
+			dlg = wx.MessageDialog(None, _(
+				'After installing the selected package, OpenPlotter will restart. Are you sure?'),
+				_('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_QUESTION)
+			if dlg.ShowModal() == wx.ID_YES:
+				subprocess.call([self.platform.admin, 'systemctl', 'stop', 'signalk.service'])
+				subprocess.call([self.platform.admin, 'systemctl', 'stop', 'signalk.socket'])
+				subprocess.check_output([self.platform.admin, 'systemctl', 'stop', 'pypilot_boatimu']).decode(sys.stdin.encoding)
+				subprocess.check_output([self.platform.admin, 'systemctl', 'stop', 'pypilot']).decode(sys.stdin.encoding)
+				self.ShowStatusBarYELLOW(_('Updating Moitessier Hat modules and firmware...'))
+				self.logger.Clear()
+				self.notebook.ChangeSelection(3)
+				self.logger.EndBold()
+				self.logger.BeginTextColour((55, 55, 55))
+				command = self.platform.admin+' dpkg -i '+self.driversFolder+'/'+self.packages_select.GetStringSelection()
+				popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
+				for line in popen.stdout:
+					if not 'Warning' in line and not 'WARNING' in line:
+						self.logger.WriteText(line)
+						self.ShowStatusBarYELLOW(_('Installing package data, please wait... ')+line)
+						self.logger.ShowPosition(self.logger.GetLastPosition())
+				self.logger.EndTextColour()
+			dlg.Destroy()
+
+	def on_uninstall(self,e):
+		dlg = wx.MessageDialog(None, _(
+			'After uninstalling the moiessier package, OpenPlotter will restart. Are you sure?'),
+			_('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_QUESTION)
+		if dlg.ShowModal() == wx.ID_YES:
 			self.logger.Clear()
 			self.notebook.ChangeSelection(3)
 			self.logger.EndBold()
 			self.logger.BeginTextColour((55, 55, 55))
-			command = self.platform.admin+' dpkg -i '+self.driversFolder+'/'+self.packages_select.GetStringSelection()
+			command = self.platform.admin+' dpkg -r moitessier'
 			popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
 			for line in popen.stdout:
 				if not 'Warning' in line and not 'WARNING' in line:
 					self.logger.WriteText(line)
-					self.ShowStatusBarYELLOW(_('Installing package data, please wait... ')+line)
+					self.ShowStatusBarYELLOW(_('Removing Moitessier Hat drivers, please wait... ')+line)
 					self.logger.ShowPosition(self.logger.GetLastPosition())
 			self.logger.EndTextColour()
 
-	def on_uninstall(self,e):
-		self.logger.Clear()
-		self.notebook.ChangeSelection(3)
-		self.logger.EndBold()
-		self.logger.BeginTextColour((55, 55, 55))
-		command = self.platform.admin+' dpkg -r moitessier'
-		popen = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, shell=True)
-		for line in popen.stdout:
-			if not 'Warning' in line and not 'WARNING' in line:
-				self.logger.WriteText(line)
-				self.ShowStatusBarYELLOW(_('Removing Moitessier Hat drivers, please wait... ')+line)
-				self.logger.ShowPosition(self.logger.GetLastPosition())
-		self.logger.EndTextColour()
-
-		file = open('/boot/config.txt', 'r')
-		file1 = open('config.txt', 'w')
-		exists = False
-		while True:
-			line = file.readline()
-			if not line: break
-			if 'dtoverlay=i2c-gpio,i2c_gpio_sda=2,i2c_gpio_scl=3,bus=3' in line: pass
-			else: file1.write(line)
-		file.close()
-		file1.close()
-		if os.system('diff config.txt /boot/config.txt > /dev/null'):
-			os.system(self.platform.admin+' mv config.txt /boot')
-		else: os.system(self.platform.admin+' rm -f config.txt')
-
-		self.ShowStatusBarYELLOW(_('Moitessier Hat drivers removed.'))
+			file = open('/boot/config.txt', 'r')
+			file1 = open('config.txt', 'w')
+			exists = False
+			while True:
+				line = file.readline()
+				if not line: break
+				if 'dtoverlay=i2c-gpio,i2c_gpio_sda=2,i2c_gpio_scl=3,bus=3' in line: pass
+				else: file1.write(line)
+			file.close()
+			file1.close()
+			if os.system('diff config.txt /boot/config.txt > /dev/null'):
+				os.system(self.platform.admin+' mv config.txt /boot')
+			else: os.system(self.platform.admin+' rm -f config.txt')
+			self.ShowStatusBarYELLOW(_('Moitessier Hat drivers removed.'))
+			os.system('shutdown -r now')
+		dlg.Destroy()
 
 	def onDownload(self,e):
 		kernel = subprocess.check_output(['uname','-r']).decode(sys.stdin.encoding)
