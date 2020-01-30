@@ -65,8 +65,8 @@ class Check():
 				if not red: red = txt
 				else: red += '\n'+txt
 
-		spidev = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
-		if 'spidev' in spidev:
+		spi_bcm2835 = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
+		if 'spi_bcm2835' in spi_bcm2835:
 			txt = _('SPI enabled')
 			if not black: black = txt
 			else: black += ' | '+txt
