@@ -1,0 +1,438 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: openplotter\n"
+"POT-Creation-Date: 2020-01-08 18:20+0100\n"
+"PO-Revision-Date: 2020-01-30 19:47+0100\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Crowdin-Project: openplotter\n"
+"X-Crowdin-Language: es-ES\n"
+"X-Crowdin-File: openplotter-moitessier.po\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: moitessierPostInstall.py:28
+msgid "Copying driver packages..."
+msgstr "Copiando paquetes de controladores..."
+
+#: moitessierPostInstall.py:41 moitessierPreUninstall.py:34
+#: moitessierPreUninstall.py:55
+msgid "DONE"
+msgstr "HECHO"
+
+#: moitessierPostInstall.py:42 moitessierPreUninstall.py:35
+#: moitessierPreUninstall.py:56
+msgid "FAILED: "
+msgstr "ERROR: "
+
+#: moitessierPreUninstall.py:29
+msgid "Removing drivers packages..."
+msgstr "Eliminando paquetes de controladores..."
+
+#: moitessierPreUninstall.py:37
+msgid "Uninstalling drivers..."
+msgstr "Desinstalando controladores..."
+
+#: openplotterMoitessier.py:36
+msgid "OpenPlotter Moitessier HAT App"
+msgstr "OpenPlotter Moitessier HAT App"
+
+#: openplotterMoitessier.py:46
+msgid "Help"
+msgstr "Ayuda"
+
+#: openplotterMoitessier.py:49 openplotterMoitessier.py:65
+msgid "Settings"
+msgstr "Ajustes"
+
+#: openplotterMoitessier.py:52
+msgid "Apply Changes"
+msgstr "Aplicar cambios"
+
+#: openplotterMoitessier.py:54
+msgid "Cancel Changes"
+msgstr "Cancelar Cambios"
+
+#: openplotterMoitessier.py:64
+msgid "Drivers"
+msgstr "Controladores"
+
+#: openplotterMoitessier.py:145
+msgid "Check System"
+msgstr "Comprobar sistema"
+
+#: openplotterMoitessier.py:147
+msgid "Check configuration"
+msgstr "Comprobar configuración"
+
+#: openplotterMoitessier.py:150
+msgid "Check Settings"
+msgstr "Comprobar ajustes"
+
+#: openplotterMoitessier.py:153
+msgid "Statistics"
+msgstr "Estatísticas"
+
+#: openplotterMoitessier.py:155
+msgid "Reset"
+msgstr "Reseteo"
+
+#: openplotterMoitessier.py:159
+msgid "Check IMU temperature"
+msgstr "Comprobar temperatura IMU"
+
+#: openplotterMoitessier.py:161
+msgid "Check pressure"
+msgstr "Comprobar presión"
+
+#: openplotterMoitessier.py:180 openplotterMoitessier.py:185
+msgid "Moitessier HAT is not attached!\n"
+msgstr "¡HAT Moitessier no conectado!\n"
+
+#: openplotterMoitessier.py:189
+msgid "Moitessier HAT is attached.\n"
+msgstr "¡HAT Moitessier conectado.\n"
+
+#: openplotterMoitessier.py:195
+msgid "Your Raspberry Pi is too old!\n"
+msgstr "Tu Raspberry Pi es muy antigua!\n"
+
+#: openplotterMoitessier.py:201
+msgid "I2C is enabled.\n"
+msgstr "I2C está activado.\n"
+
+#: openplotterMoitessier.py:205
+msgid "I2C is disabled. Please enable I2C interface in Preferences -> Raspberry Pi configuration -> Interfaces.\n"
+msgstr "I2C está deshabilitado. Por favor habilite la interfaz I2C en Preferencias -> Configuración de Raspberry Pi -> Interfaces.\n"
+
+#: openplotterMoitessier.py:211
+msgid "SPI is enabled.\n"
+msgstr "SPI está activado.\n"
+
+#: openplotterMoitessier.py:215
+msgid "SPI is disabled. Please enable SPI interface in Preferences -> Raspberry Pi configuration -> Interfaces.\n"
+msgstr "SPI está desactivado. Por favor, habilite la interfaz SPI en Preferencias -> Configuración Raspberry Pi -> Interfaces.\n"
+
+#: openplotterMoitessier.py:221 openplotterMoitessier.py:317
+msgid "Moitessier HAT package is not installed!\n"
+msgstr "¡Paquete del HAT Moitessier no instalado!\n"
+
+#: openplotterMoitessier.py:226
+msgid "Moitessier HAT package is installed.\n"
+msgstr "¡Paquete del HAT Moitessier instalado.\n"
+
+#: openplotterMoitessier.py:238
+msgid "The installed package does not support the current kernel version, go to \"Drivers\" tab to update it.\n"
+msgstr "El paquete instalado no soporta la versión actual del núcleo, vaya a la pestaña \"Drivers\" para actualizarlo.\n"
+
+#: openplotterMoitessier.py:279
+msgid "MPU-9250 temperature: "
+msgstr "Temperatura MPU-925: "
+
+#: openplotterMoitessier.py:280 openplotterMoitessier.py:289
+msgid "To get accurate readings, make sure the sensor is not being read by another application."
+msgstr "Para obtener lecturas precisas, asegúrese de que el sensor no está siendo leído por otra aplicación."
+
+#: openplotterMoitessier.py:288
+msgid "MS5607-02BA03 pressure and temperature: "
+msgstr "Presión y temperatura MS5607-02BA03: "
+
+#: openplotterMoitessier.py:329
+msgid " Current kernel version "
+msgstr " Versión actual del kernel "
+
+#: openplotterMoitessier.py:335
+msgid " Supported versions "
+msgstr " Versiones soportadas "
+
+#: openplotterMoitessier.py:354
+msgid "The current package does not support the current kernel. Try to update the package. If you do not find a suitable package contact us at https://rooco.eu"
+msgstr "El paquete actual no soporta el kernel actual. Intente actualizar el paquete. Si no encuentra un paquete adecuado, contáctenos en https://rooco.eu"
+
+#: openplotterMoitessier.py:359
+msgid "Moitessier HAT package is not installed, please install it."
+msgstr "El paquete Moitessier HAT no está instalado, por favor instálalo."
+
+#: openplotterMoitessier.py:362
+msgid " Available packages "
+msgstr " Paquetes disponibles "
+
+#: openplotterMoitessier.py:367
+msgid "Install"
+msgstr "Instalar"
+
+#: openplotterMoitessier.py:370
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+#: openplotterMoitessier.py:373
+msgid "Download"
+msgstr "Descargar"
+
+#: openplotterMoitessier.py:376
+msgid "All drivers"
+msgstr "Todos los conductores"
+
+#: openplotterMoitessier.py:422
+msgid "Select a package to install."
+msgstr "Escoge el paquete a instalar."
+
+#: openplotterMoitessier.py:428
+msgid "Updating Moitessier Hat modules and firmware..."
+msgstr "Actualizando los módulos y el firmware del Hat Moitessier..."
+
+#: openplotterMoitessier.py:438
+msgid "Installing package data, please wait... "
+msgstr "Instalando paquete, espere... "
+
+#: openplotterMoitessier.py:452
+msgid "Removing Moitessier Hat drivers, please wait... "
+msgstr "Eliminando controladores del Moitessier Hat, por favor espere... "
+
+#: openplotterMoitessier.py:470
+msgid "Moitessier Hat drivers removed."
+msgstr "Controladores del Moitessier eliminados."
+
+#: openplotterMoitessier.py:476
+msgid "Searching package "
+msgstr "Buscando paquete "
+
+#: openplotterMoitessier.py:479
+msgid "Package downloaded!"
+msgstr "¡Paquete descargado!"
+
+#: openplotterMoitessier.py:481
+msgid "Package not found!"
+msgstr "Paquete no encontrado!"
+
+#: openplotterMoitessier.py:491
+msgid "Enable"
+msgstr "Activar"
+
+#: openplotterMoitessier.py:494
+msgid "Disable"
+msgstr "Desactivar"
+
+#: openplotterMoitessier.py:497
+msgid " General "
+msgstr " General "
+
+#: openplotterMoitessier.py:499
+msgid "Reset HAT"
+msgstr "Restablecer HAT"
+
+#: openplotterMoitessier.py:502
+msgid "Load defaults"
+msgstr "Cargar valores por defecto"
+
+#: openplotterMoitessier.py:507
+msgid "enable simulator"
+msgstr "activar simulador"
+
+#: openplotterMoitessier.py:509
+msgid "interval (ms)"
+msgstr "intervalo (ms)"
+
+#: openplotterMoitessier.py:512
+msgid "MMSI boat 1"
+msgstr "MMSI barco 1"
+
+#: openplotterMoitessier.py:515
+msgid "MMSI boat 2"
+msgstr "MMSI barco 2"
+
+#: openplotterMoitessier.py:518
+msgid "channel A [Hz]"
+msgstr "canal A [Hz]"
+
+#: openplotterMoitessier.py:519
+msgid "channel B [Hz]"
+msgstr "canal B [Hz]"
+
+#: openplotterMoitessier.py:525 openplotterMoitessier.py:950
+#: openplotterMoitessier.py:962
+msgid "none"
+msgstr "nada"
+
+#: openplotterMoitessier.py:608
+msgid "Failure reading HAT settings!"
+msgstr "¡Fallo leyendo ajustes HAT!"
+
+#: openplotterMoitessier.py:633
+msgid "Failure reading default_config.xml file!"
+msgstr "¡Error al leer archivo config.xml!"
+
+#: openplotterMoitessier.py:635
+msgid "Defaults loaded. Apply changes"
+msgstr "Valores por defecto cargados. Aplicar cambios"
+
+#: openplotterMoitessier.py:670
+msgid "Changes applied!"
+msgstr "Cambios aplicados!"
+
+#: openplotterMoitessier.py:672
+msgid "Apply changes failed!"
+msgstr "¡No se pudieron aplicar los cambios!"
+
+#: openplotterMoitessier.py:685
+msgid "Device:"
+msgstr "Dispositivo:"
+
+#: openplotterMoitessier.py:702
+msgid "Alias:"
+msgstr "Alias:"
+
+#: openplotterMoitessier.py:705 openplotterMoitessier.py:790
+#: openplotterMoitessier.py:854 openplotterMoitessier.py:966
+msgid "Connection: "
+msgstr "Conexión: "
+
+#: openplotterMoitessier.py:715 openplotterMoitessier.py:722
+msgid "App = "
+msgstr "App = "
+
+#: openplotterMoitessier.py:715 openplotterMoitessier.py:722
+msgid "Device = "
+msgstr "Dispositivo = "
+
+#: openplotterMoitessier.py:715 openplotterMoitessier.py:722
+msgid "ID = "
+msgstr "ID = "
+
+#: openplotterMoitessier.py:716 openplotterMoitessier.py:723
+msgid "Status = enabled"
+msgstr "Estado = habilitado"
+
+#: openplotterMoitessier.py:719 openplotterMoitessier.py:724
+msgid "Status = disabled"
+msgstr "Estado = deshabilitado"
+
+#: openplotterMoitessier.py:735 openplotterMoitessier.py:814
+#: openplotterMoitessier.py:878 openplotterMoitessier.py:990
+msgid "not connected"
+msgstr "desconectado"
+
+#: openplotterMoitessier.py:757
+msgid "Compass - Trim - Heel"
+msgstr "Compas - escora asiento"
+
+#: openplotterMoitessier.py:763
+msgid "Please install openplotter-pypilot app"
+msgstr "Por favor, instale la aplicación openplotter-pypilot"
+
+#: openplotterMoitessier.py:767
+msgid "Pypilot mode: "
+msgstr "Modo pypilot: "
+
+#: openplotterMoitessier.py:780
+msgid "only compass"
+msgstr "solo Compas"
+
+#: openplotterMoitessier.py:781
+msgid "autopilot"
+msgstr "piloto automático"
+
+#: openplotterMoitessier.py:784 openplotterMoitessier.py:811
+#: openplotterMoitessier.py:826 openplotterMoitessier.py:837
+#: openplotterMoitessier.py:848 openplotterMoitessier.py:875
+#: openplotterMoitessier.py:887 openplotterMoitessier.py:903
+#: openplotterMoitessier.py:914 openplotterMoitessier.py:987
+#: openplotterMoitessier.py:1003 openplotterMoitessier.py:1014
+msgid "disabled"
+msgstr "deshabilitado"
+
+#: openplotterMoitessier.py:803 openplotterMoitessier.py:867
+#: openplotterMoitessier.py:979
+msgid "Signal K connection ID = "
+msgstr "ID de Conexión Signal K "
+
+#: openplotterMoitessier.py:819 openplotterMoitessier.py:883
+#: openplotterMoitessier.py:996
+msgid "Signal K to NMEA 0183 plugin: "
+msgstr "Signal K - Salida NMEA 0183 plugin: "
+
+#: openplotterMoitessier.py:823 openplotterMoitessier.py:834
+#: openplotterMoitessier.py:845 openplotterMoitessier.py:892
+#: openplotterMoitessier.py:900 openplotterMoitessier.py:911
+#: openplotterMoitessier.py:1000 openplotterMoitessier.py:1011
+msgid "enabled"
+msgstr "habilitado"
+
+#: openplotterMoitessier.py:830 openplotterMoitessier.py:896
+msgid "Heading conversion: "
+msgstr "Conversión de rumbo: "
+
+#: openplotterMoitessier.py:841 openplotterMoitessier.py:907
+msgid "Trim - Heel conversion: "
+msgstr "Ajuste asiento - escora: "
+
+#: openplotterMoitessier.py:922
+msgid "Pressure - Temperature"
+msgstr "Presión - Temperatura"
+
+#: openplotterMoitessier.py:928
+msgid "Please install openplotter-i2c app"
+msgstr "Por favor, instale la aplicación openplotter-i2c"
+
+#: openplotterMoitessier.py:943
+msgid "I2C - Signal K key for pressure: "
+msgstr "I2C - clave de Signal K para presión: "
+
+#: openplotterMoitessier.py:955
+msgid "I2C - Signal K key for temperature: "
+msgstr "I2C - clave de Signal K para temperatura: "
+
+#: openplotterMoitessier.py:1007
+msgid "Pressure conversion: "
+msgstr "Conversión de presión: "
+
+#: startup.py:40
+msgid "Checking Moitessier HAT..."
+msgstr "Comprobando Moitessier HAT..."
+
+#: startup.py:49 startup.py:51
+msgid "not attached"
+msgstr "no montado"
+
+#: startup.py:52
+msgid "attached"
+msgstr "montado"
+
+#: startup.py:56
+msgid "Your Raspberry Pi is too old!"
+msgstr "Tu Raspberry Pi es muy antigua!"
+
+#: startup.py:60
+msgid "I2C enabled"
+msgstr "I2C habilitado"
+
+#: startup.py:64
+msgid "I2C is disabled. Please enable I2C interface in Preferences -> Raspberry Pi configuration -> Interfaces."
+msgstr "I2C está deshabilitado. Por favor habilite la interfaz I2C en Preferencias -> Configuración de Raspberry Pi -> Interfaces."
+
+#: startup.py:70
+msgid "SPI enabled"
+msgstr "SPI habilitado"
+
+#: startup.py:74
+msgid "SPI is disabled. Please enable SPI interface in Preferences -> Raspberry Pi configuration -> Interfaces."
+msgstr "SPI está deshabilitado. Por favor habilite la interfaz SPI en Preferencias -> Configuración Raspberry Pi -> Interfaces."
+
+#: startup.py:80
+msgid "Moitessier HAT driver is not installed."
+msgstr "¡Controlador del HAT Moitessier no instalado."
+
+#: startup.py:84
+msgid "package installed"
+msgstr "paquete instalado"
+
+#: startup.py:95
+msgid "The installed package does not support the current kernel version, go to Moitessier HAT app to update it."
+msgstr "El paquete instalado no soporta la versión actual del núcleo, vaya a la pestaña \"Drivers\" para actualizarlo."
