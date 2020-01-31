@@ -446,7 +446,7 @@ class MyFrame(wx.Frame):
 
 	def on_uninstall(self,e):
 		dlg = wx.MessageDialog(None, _(
-			'After uninstalling the moiessier package, OpenPlotter will restart. Are you sure?'),
+			'After uninstalling the package, OpenPlotter will restart. Are you sure?'),
 			_('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_QUESTION)
 		if dlg.ShowModal() == wx.ID_YES:
 			self.logger.Clear()

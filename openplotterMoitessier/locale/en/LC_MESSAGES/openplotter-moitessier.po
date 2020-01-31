@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter-moitessier\n"
-"POT-Creation-Date: 2020-01-08 18:20+0100\n"
-"PO-Revision-Date: 2020-01-08 18:20+0100\n"
+"POT-Creation-Date: 2020-01-31 16:58+0100\n"
+"PO-Revision-Date: 2020-01-31 16:58+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -19,14 +19,18 @@ msgstr ""
 msgid "Copying driver packages..."
 msgstr ""
 
-#: moitessierPostInstall.py:41 moitessierPreUninstall.py:34
-#: moitessierPreUninstall.py:55
+#: moitessierPostInstall.py:41 moitessierPostInstall.py:53
+#: moitessierPreUninstall.py:34 moitessierPreUninstall.py:53
 msgid "DONE"
 msgstr ""
 
-#: moitessierPostInstall.py:42 moitessierPreUninstall.py:35
-#: moitessierPreUninstall.py:56
+#: moitessierPostInstall.py:42 moitessierPostInstall.py:54
+#: moitessierPreUninstall.py:35 moitessierPreUninstall.py:54
 msgid "FAILED: "
+msgstr ""
+
+#: moitessierPostInstall.py:44
+msgid "Modifying config.txt..."
 msgstr ""
 
 #: moitessierPreUninstall.py:29
@@ -191,212 +195,226 @@ msgstr ""
 msgid "Select a package to install."
 msgstr ""
 
-#: openplotterMoitessier.py:428
+#: openplotterMoitessier.py:425
+msgid ""
+"After installing the selected package, OpenPlotter will restart. Are you "
+"sure?"
+msgstr ""
+
+#: openplotterMoitessier.py:426 openplotterMoitessier.py:450
+msgid "Question"
+msgstr ""
+
+#: openplotterMoitessier.py:432
 msgid "Updating Moitessier Hat modules and firmware..."
 msgstr ""
 
-#: openplotterMoitessier.py:438
+#: openplotterMoitessier.py:442
 msgid "Installing package data, please wait... "
 msgstr ""
 
-#: openplotterMoitessier.py:452
+#: openplotterMoitessier.py:449
+msgid "After uninstalling the package, OpenPlotter will restart. Are you sure?"
+msgstr ""
+
+#: openplotterMoitessier.py:461
 msgid "Removing Moitessier Hat drivers, please wait... "
 msgstr ""
 
-#: openplotterMoitessier.py:470
+#: openplotterMoitessier.py:478
 msgid "Moitessier Hat drivers removed."
 msgstr ""
 
-#: openplotterMoitessier.py:476
+#: openplotterMoitessier.py:486
 msgid "Searching package "
 msgstr ""
 
-#: openplotterMoitessier.py:479
+#: openplotterMoitessier.py:489
 msgid "Package downloaded!"
 msgstr ""
 
-#: openplotterMoitessier.py:481
+#: openplotterMoitessier.py:491
 msgid "Package not found!"
 msgstr ""
 
-#: openplotterMoitessier.py:491
+#: openplotterMoitessier.py:501
 msgid "Enable"
 msgstr ""
 
-#: openplotterMoitessier.py:494
+#: openplotterMoitessier.py:504
 msgid "Disable"
 msgstr ""
 
-#: openplotterMoitessier.py:497
+#: openplotterMoitessier.py:507
 msgid " General "
 msgstr ""
 
-#: openplotterMoitessier.py:499
+#: openplotterMoitessier.py:509
 msgid "Reset HAT"
 msgstr ""
 
-#: openplotterMoitessier.py:502
+#: openplotterMoitessier.py:512
 msgid "Load defaults"
 msgstr ""
 
-#: openplotterMoitessier.py:507
+#: openplotterMoitessier.py:517
 msgid "enable simulator"
 msgstr ""
 
-#: openplotterMoitessier.py:509
+#: openplotterMoitessier.py:519
 msgid "interval (ms)"
 msgstr ""
 
-#: openplotterMoitessier.py:512
+#: openplotterMoitessier.py:522
 msgid "MMSI boat 1"
 msgstr ""
 
-#: openplotterMoitessier.py:515
+#: openplotterMoitessier.py:525
 msgid "MMSI boat 2"
 msgstr ""
 
-#: openplotterMoitessier.py:518
+#: openplotterMoitessier.py:528
 msgid "channel A [Hz]"
 msgstr ""
 
-#: openplotterMoitessier.py:519
+#: openplotterMoitessier.py:529
 msgid "channel B [Hz]"
 msgstr ""
 
-#: openplotterMoitessier.py:525 openplotterMoitessier.py:950
-#: openplotterMoitessier.py:962
+#: openplotterMoitessier.py:535 openplotterMoitessier.py:963
+#: openplotterMoitessier.py:975
 msgid "none"
 msgstr ""
 
-#: openplotterMoitessier.py:608
+#: openplotterMoitessier.py:618
 msgid "Failure reading HAT settings!"
 msgstr ""
 
-#: openplotterMoitessier.py:633
+#: openplotterMoitessier.py:643
 msgid "Failure reading default_config.xml file!"
 msgstr ""
 
-#: openplotterMoitessier.py:635
+#: openplotterMoitessier.py:645
 msgid "Defaults loaded. Apply changes"
 msgstr ""
 
-#: openplotterMoitessier.py:670
+#: openplotterMoitessier.py:680
 msgid "Changes applied!"
 msgstr ""
 
-#: openplotterMoitessier.py:672
+#: openplotterMoitessier.py:682
 msgid "Apply changes failed!"
 msgstr ""
 
-#: openplotterMoitessier.py:685
+#: openplotterMoitessier.py:695
 msgid "Device:"
 msgstr ""
 
-#: openplotterMoitessier.py:702
+#: openplotterMoitessier.py:712
 msgid "Alias:"
 msgstr ""
 
-#: openplotterMoitessier.py:705 openplotterMoitessier.py:790
-#: openplotterMoitessier.py:854 openplotterMoitessier.py:966
+#: openplotterMoitessier.py:715 openplotterMoitessier.py:803
+#: openplotterMoitessier.py:867 openplotterMoitessier.py:979
 msgid "Connection: "
 msgstr ""
 
-#: openplotterMoitessier.py:715 openplotterMoitessier.py:722
+#: openplotterMoitessier.py:725 openplotterMoitessier.py:732
 msgid "App = "
 msgstr ""
 
-#: openplotterMoitessier.py:715 openplotterMoitessier.py:722
+#: openplotterMoitessier.py:725 openplotterMoitessier.py:732
 msgid "Device = "
 msgstr ""
 
-#: openplotterMoitessier.py:715 openplotterMoitessier.py:722
+#: openplotterMoitessier.py:725 openplotterMoitessier.py:732
 msgid "ID = "
 msgstr ""
 
-#: openplotterMoitessier.py:716 openplotterMoitessier.py:723
+#: openplotterMoitessier.py:726 openplotterMoitessier.py:733
 msgid "Status = enabled"
 msgstr ""
 
-#: openplotterMoitessier.py:719 openplotterMoitessier.py:724
+#: openplotterMoitessier.py:729 openplotterMoitessier.py:734
 msgid "Status = disabled"
 msgstr ""
 
-#: openplotterMoitessier.py:735 openplotterMoitessier.py:814
-#: openplotterMoitessier.py:878 openplotterMoitessier.py:990
+#: openplotterMoitessier.py:745 openplotterMoitessier.py:827
+#: openplotterMoitessier.py:891 openplotterMoitessier.py:1003
 msgid "not connected"
 msgstr ""
 
-#: openplotterMoitessier.py:757
+#: openplotterMoitessier.py:768
 msgid "Compass - Trim - Heel"
 msgstr ""
 
-#: openplotterMoitessier.py:763
+#: openplotterMoitessier.py:776
 msgid "Please install openplotter-pypilot app"
 msgstr ""
 
-#: openplotterMoitessier.py:767
+#: openplotterMoitessier.py:780
 msgid "Pypilot mode: "
 msgstr ""
 
-#: openplotterMoitessier.py:780
+#: openplotterMoitessier.py:793
 msgid "only compass"
 msgstr ""
 
-#: openplotterMoitessier.py:781
+#: openplotterMoitessier.py:794
 msgid "autopilot"
 msgstr ""
 
-#: openplotterMoitessier.py:784 openplotterMoitessier.py:811
-#: openplotterMoitessier.py:826 openplotterMoitessier.py:837
-#: openplotterMoitessier.py:848 openplotterMoitessier.py:875
-#: openplotterMoitessier.py:887 openplotterMoitessier.py:903
-#: openplotterMoitessier.py:914 openplotterMoitessier.py:987
-#: openplotterMoitessier.py:1003 openplotterMoitessier.py:1014
+#: openplotterMoitessier.py:797 openplotterMoitessier.py:824
+#: openplotterMoitessier.py:839 openplotterMoitessier.py:850
+#: openplotterMoitessier.py:861 openplotterMoitessier.py:888
+#: openplotterMoitessier.py:900 openplotterMoitessier.py:916
+#: openplotterMoitessier.py:927 openplotterMoitessier.py:1000
+#: openplotterMoitessier.py:1016 openplotterMoitessier.py:1027
 msgid "disabled"
 msgstr ""
 
-#: openplotterMoitessier.py:803 openplotterMoitessier.py:867
-#: openplotterMoitessier.py:979
+#: openplotterMoitessier.py:816 openplotterMoitessier.py:880
+#: openplotterMoitessier.py:992
 msgid "Signal K connection ID = "
 msgstr ""
 
-#: openplotterMoitessier.py:819 openplotterMoitessier.py:883
-#: openplotterMoitessier.py:996
+#: openplotterMoitessier.py:832 openplotterMoitessier.py:896
+#: openplotterMoitessier.py:1009
 msgid "Signal K to NMEA 0183 plugin: "
 msgstr ""
 
-#: openplotterMoitessier.py:823 openplotterMoitessier.py:834
-#: openplotterMoitessier.py:845 openplotterMoitessier.py:892
-#: openplotterMoitessier.py:900 openplotterMoitessier.py:911
-#: openplotterMoitessier.py:1000 openplotterMoitessier.py:1011
+#: openplotterMoitessier.py:836 openplotterMoitessier.py:847
+#: openplotterMoitessier.py:858 openplotterMoitessier.py:905
+#: openplotterMoitessier.py:913 openplotterMoitessier.py:924
+#: openplotterMoitessier.py:1013 openplotterMoitessier.py:1024
 msgid "enabled"
 msgstr ""
 
-#: openplotterMoitessier.py:830 openplotterMoitessier.py:896
+#: openplotterMoitessier.py:843 openplotterMoitessier.py:909
 msgid "Heading conversion: "
 msgstr ""
 
-#: openplotterMoitessier.py:841 openplotterMoitessier.py:907
+#: openplotterMoitessier.py:854 openplotterMoitessier.py:920
 msgid "Trim - Heel conversion: "
 msgstr ""
 
-#: openplotterMoitessier.py:922
+#: openplotterMoitessier.py:935
 msgid "Pressure - Temperature"
 msgstr ""
 
-#: openplotterMoitessier.py:928
+#: openplotterMoitessier.py:941
 msgid "Please install openplotter-i2c app"
 msgstr ""
 
-#: openplotterMoitessier.py:943
+#: openplotterMoitessier.py:956
 msgid "I2C - Signal K key for pressure: "
 msgstr ""
 
-#: openplotterMoitessier.py:955
+#: openplotterMoitessier.py:968
 msgid "I2C - Signal K key for temperature: "
 msgstr ""
 
-#: openplotterMoitessier.py:1007
+#: openplotterMoitessier.py:1020
 msgid "Pressure conversion: "
 msgstr ""
 
