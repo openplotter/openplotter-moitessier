@@ -40,7 +40,6 @@ def main():
 
 		file = open('/boot/config.txt', 'r')
 		file1 = open('config.txt', 'w')
-		exists = False
 		while True:
 			line = file.readline()
 			if not line: break
@@ -48,8 +47,7 @@ def main():
 			else: file1.write(line)
 		file.close()
 		file1.close()
-		if os.system('diff config.txt /boot/config.txt > /dev/null'):
-			os.system('mv config.txt /boot')
+		if os.system('diff config.txt /boot/config.txt > /dev/null'): os.system('mv config.txt /boot')
 		else: os.system('rm -f config.txt')
 
 		print(_('DONE'))
