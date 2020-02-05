@@ -90,7 +90,7 @@ class MyFrame(wx.Frame):
 
 		spi_bcm2835 = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
 		if not 'spi_bcm2835' in spi_bcm2835: self.button_install.Disable()
-
+		
 		maxi = self.conf.get('GENERAL', 'maximize')
 		if maxi == '1': self.Maximize()
 		
@@ -170,6 +170,7 @@ class MyFrame(wx.Frame):
 		self.info.SetSizer(vbox)
 
 	def OnToolCheck(self,e=0):
+		button_install = True
 		self.logger.Clear()
 		self.notebook.ChangeSelection(3)
 		self.logger.BeginBold()
@@ -204,6 +205,7 @@ class MyFrame(wx.Frame):
 				self.logger.BeginTextColour((130, 0, 0))
 				self.logger.WriteText(_('I2C is disabled. Please enable I2C interface in Preferences -> Raspberry Pi configuration -> Interfaces.\n'))
 				self.logger.EndTextColour()
+				button_install = False
 
 		spi_bcm2835 = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
 		if 'spi_bcm2835' in spi_bcm2835:
@@ -214,6 +216,7 @@ class MyFrame(wx.Frame):
 			self.logger.BeginTextColour((130, 0, 0))
 			self.logger.WriteText(_('SPI is disabled. Please enable SPI interface in Preferences -> Raspberry Pi configuration -> Interfaces.\n'))
 			self.logger.EndTextColour()
+			button_install = False
 
 		modulesPath = self.conf.home+'/moitessier/modules'
 		if not os.path.exists(modulesPath):
@@ -241,6 +244,9 @@ class MyFrame(wx.Frame):
 			self.logger.BeginTextColour((55, 55, 55))
 			self.logger.WriteText(driver)
 			self.logger.EndTextColour()
+
+		if button_install: self.button_install.Enable()
+		else: self.button_install.Disable()
 
 	def extract_value(self, data):
 		option, value = data.split(':')
