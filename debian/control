@@ -1,0 +1,15 @@
+Source: openplotter-moitessier
+Section: misc
+Priority: optional
+Maintainer: Sailoog <info@sailoog.com>
+Build-Depends: debhelper (>=9),dh-python,python3-all,python3-setuptools
+Standards-Version: 3.9.6
+Homepage: https://github.com/openplotter/openplotter-moitessier
+X-Python3-Version: >= 3.2
+
+Package: openplotter-moitessier
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}, ${python3:Depends}, openplotter-settings
+Description: OpenPlotter app to manage the Moitessier HAT
+ OpenPlotter app to manage the Moitessier HAT
