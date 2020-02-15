@@ -22,6 +22,7 @@ from openplotterSettings import conf
 from openplotterSettings import language
 from openplotterSettings import platform
 from openplotterSettings import serialPorts
+from .version import version
 
 class MyFrame(wx.Frame):
 	def __init__(self):
@@ -33,7 +34,7 @@ class MyFrame(wx.Frame):
 		self.language = language.Language(self.currentdir,'openplotter-moitessier',self.currentLanguage)
 		self.driversFolder = self.conf.conf_folder+'/moitessier'
 
-		wx.Frame.__init__(self, None, title=_('OpenPlotter Moitessier HAT App'), size=(800,444))
+		wx.Frame.__init__(self, None, title=_('OpenPlotter Moitessier HAT')+' '+version, size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		icon = wx.Icon(self.currentdir+"/data/openplotter-moitessier.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
@@ -1037,6 +1038,13 @@ class MyFrame(wx.Frame):
 ################################################################################
 
 def main():
+	try:
+		platform2 = platform.Platform()
+		if not platform2.postInstall(version,'moitessier'):
+			subprocess.Popen(['openplotterPostInstall', platform2.admin+' moitessierPostInstall'])
+			return
+	except: pass
+
 	app = wx.App()
 	MyFrame().Show()
 	time.sleep(1)
