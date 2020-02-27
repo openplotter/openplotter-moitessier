@@ -34,7 +34,7 @@ class MyFrame(wx.Frame):
 		self.language = language.Language(self.currentdir,'openplotter-moitessier',self.currentLanguage)
 		self.driversFolder = self.conf.conf_folder+'/moitessier'
 
-		wx.Frame.__init__(self, None, title=_('OpenPlotter Moitessier HAT')+' '+version, size=(800,444))
+		wx.Frame.__init__(self, None, title='Moitessier HAT '+version, size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		icon = wx.Icon(self.currentdir+"/data/openplotter-moitessier.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
@@ -432,10 +432,12 @@ class MyFrame(wx.Frame):
 				'After installing the selected package, OpenPlotter will restart. Are you sure?'),
 				_('Question'), wx.YES_NO | wx.NO_DEFAULT | wx.ICON_QUESTION)
 			if dlg.ShowModal() == wx.ID_YES:
-				subprocess.call([self.platform.admin, 'systemctl', 'stop', 'signalk.service'])
-				subprocess.call([self.platform.admin, 'systemctl', 'stop', 'signalk.socket'])
-				subprocess.check_output([self.platform.admin, 'systemctl', 'stop', 'pypilot_boatimu']).decode(sys.stdin.encoding)
-				subprocess.check_output([self.platform.admin, 'systemctl', 'stop', 'pypilot']).decode(sys.stdin.encoding)
+				try:
+					subprocess.call([self.platform.admin, 'systemctl', 'stop', 'signalk.service'])
+					subprocess.call([self.platform.admin, 'systemctl', 'stop', 'signalk.socket'])
+					subprocess.check_output([self.platform.admin, 'systemctl', 'stop', 'pypilot_boatimu']).decode(sys.stdin.encoding)
+					subprocess.check_output([self.platform.admin, 'systemctl', 'stop', 'pypilot']).decode(sys.stdin.encoding)
+				except: pass
 				self.ShowStatusBarYELLOW(_('Updating Moitessier Hat modules and firmware...'))
 				self.logger.Clear()
 				self.notebook.ChangeSelection(3)
