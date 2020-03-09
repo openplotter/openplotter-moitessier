@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2020-02-27 19:21+0100\n"
-"PO-Revision-Date: 2020-02-27 19:39+0100\n"
+"PO-Revision-Date: 2020-03-09 19:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -144,7 +144,7 @@ msgstr "Le paquet installé ne supporte pas la version actuelle du noyau, allez 
 
 #: openplotterMoitessier.py:286
 msgid "MPU-9250 temperature: "
-msgstr "Température indiqué par le MPU-9250 : "
+msgstr "Température indiquée par le MPU-9250 : "
 
 #: openplotterMoitessier.py:287 openplotterMoitessier.py:296
 msgid "To get accurate readings, make sure the sensor is not being read by another application."
@@ -152,7 +152,7 @@ msgstr "Pour obtenir des lectures précises, assurez-vous que le capteur n'est p
 
 #: openplotterMoitessier.py:295
 msgid "MS5607-02BA03 pressure and temperature: "
-msgstr "Pression et température indiquées par l'unité MS5607-02BA03 : "
+msgstr "Pression et température via MS5607-02BA03 : "
 
 #: openplotterMoitessier.py:336
 msgid " Current kernel version "
@@ -164,7 +164,7 @@ msgstr " Versions supportées "
 
 #: openplotterMoitessier.py:361
 msgid "The current package does not support the current kernel. Try to update the package. If you do not find a suitable package contact us at https://rooco.eu"
-msgstr "Le paquet installé ne supporte pas la version de ce noyau. Essayez de le mettre à jour. Si vous ne trouvez pas de logiciel approprié, contactez-nous à https://rooco.eu"
+msgstr "Le paquet installé ne supporte pas la version de ce noyau. Essayez de le mettre à jour. Si vous ne trouvez pas de paquet approprié, contactez-nous à https://rooco.eu"
 
 #: openplotterMoitessier.py:366
 msgid "Moitessier HAT package is not installed, please install it."
@@ -172,7 +172,7 @@ msgstr "Le paquet du HAT Moitessier n'est pas installé, veuillez l'installer."
 
 #: openplotterMoitessier.py:369
 msgid " Available packages "
-msgstr " Paquet disponibles "
+msgstr " Paquets disponibles "
 
 #: openplotterMoitessier.py:374
 msgid "Install"
@@ -378,7 +378,7 @@ msgstr "Identifiant de connexion Signal K = "
 #: openplotterMoitessier.py:841 openplotterMoitessier.py:905
 #: openplotterMoitessier.py:1018
 msgid "Signal K to NMEA 0183 plugin: "
-msgstr "plugin de Signal K vers NMEA 0183: "
+msgstr "plugin Signal K vers NMEA 0183: "
 
 #: openplotterMoitessier.py:845 openplotterMoitessier.py:856
 #: openplotterMoitessier.py:867 openplotterMoitessier.py:914
@@ -389,7 +389,7 @@ msgstr "activé"
 
 #: openplotterMoitessier.py:852 openplotterMoitessier.py:918
 msgid "Heading conversion: "
-msgstr "Conversion d'en-tête : "
+msgstr "Conversion de l'entête : "
 
 #: openplotterMoitessier.py:863 openplotterMoitessier.py:929
 msgid "Trim - Heel conversion: "
@@ -413,7 +413,7 @@ msgstr "Clé I2C - Signal K pour la température: "
 
 #: openplotterMoitessier.py:1029
 msgid "Pressure conversion: "
-msgstr "Conversion pour pression : "
+msgstr "Conversion pour la pression : "
 
 #: startup.py:40
 msgid "Checking Moitessier HAT..."

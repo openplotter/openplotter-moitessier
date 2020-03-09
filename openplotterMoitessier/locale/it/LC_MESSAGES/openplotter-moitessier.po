@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2020-02-27 19:21+0100\n"
-"PO-Revision-Date: 2020-02-27 19:39+0100\n"
+"PO-Revision-Date: 2020-03-09 19:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -36,11 +36,11 @@ msgstr "FALLITO: "
 
 #: moitessierPostInstall.py:45
 msgid "Modifying config.txt..."
-msgstr ""
+msgstr "Modifica config.txt..."
 
 #: moitessierPostInstall.py:57
 msgid "Setting version..."
-msgstr ""
+msgstr "Impostazione versione..."
 
 #: moitessierPreUninstall.py:29
 msgid "Removing drivers packages..."
@@ -52,7 +52,7 @@ msgstr "Disinstallazione driver..."
 
 #: moitessierPreUninstall.py:56
 msgid "Removing version..."
-msgstr ""
+msgstr "Rimozione versione..."
 
 #: openplotterMoitessier.py:47
 msgid "Help"
@@ -196,11 +196,11 @@ msgstr "Selezionare un pacchetto da installare."
 
 #: openplotterMoitessier.py:432
 msgid "After installing the selected package, OpenPlotter will restart. Are you sure?"
-msgstr ""
+msgstr "Dopo aver installato il pacchetto selezionato, OpenPlotter si riavvierà. Sei sicuro?"
 
 #: openplotterMoitessier.py:433 openplotterMoitessier.py:459
 msgid "Question"
-msgstr ""
+msgstr "Domanda"
 
 #: openplotterMoitessier.py:441
 msgid "Updating Moitessier Hat modules and firmware..."
@@ -212,7 +212,7 @@ msgstr "Installazione pacchetti dati, attendere prego... "
 
 #: openplotterMoitessier.py:458
 msgid "After uninstalling the package, OpenPlotter will restart. Are you sure?"
-msgstr ""
+msgstr "Dopo aver disinstallato il pacchetto, OpenPlotter si riavvierà. Sei sicuro?"
 
 #: openplotterMoitessier.py:470
 msgid "Removing Moitessier Hat drivers, please wait... "
@@ -343,7 +343,7 @@ msgstr "non connesso"
 
 #: openplotterMoitessier.py:777
 msgid "Compass - Trim - Heel"
-msgstr ""
+msgstr "Bussola - Beccheggio - Rollio"
 
 #: openplotterMoitessier.py:785
 msgid "Please install openplotter-pypilot app"
@@ -393,7 +393,7 @@ msgstr "Conversione Direzione: "
 
 #: openplotterMoitessier.py:863 openplotterMoitessier.py:929
 msgid "Trim - Heel conversion: "
-msgstr ""
+msgstr "Aggiustamento Beccheggio - Rollio: "
 
 #: openplotterMoitessier.py:944
 msgid "Pressure - Temperature"
