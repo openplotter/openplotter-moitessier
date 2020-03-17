@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2020-02-27 19:21+0100\n"
-"PO-Revision-Date: 2020-03-09 19:34+0100\n"
+"PO-Revision-Date: 2020-03-17 18:33+0100\n"
 "Last-Translator: \n"
 "Language-Team: Danish\n"
 "Language: da\n"
@@ -64,7 +64,7 @@ msgstr "Indstillinger"
 
 #: openplotterMoitessier.py:53
 msgid "Apply Changes"
-msgstr "Foretag ændringer"
+msgstr "Anvend ændringer"
 
 #: openplotterMoitessier.py:55
 msgid "Cancel Changes"
@@ -88,7 +88,7 @@ msgstr "Kontroller indstillinger"
 
 #: openplotterMoitessier.py:154
 msgid "Statistics"
-msgstr "Statistikker"
+msgstr "Statistik"
 
 #: openplotterMoitessier.py:156
 msgid "Reset"
@@ -104,11 +104,11 @@ msgstr "Kontroller trykket"
 
 #: openplotterMoitessier.py:182 openplotterMoitessier.py:187
 msgid "Moitessier HAT is not attached!\n"
-msgstr "Moitessier HAT er ikke tilknyttet!\n"
+msgstr "Moitessier HAT er ikke tilsluttet!\n"
 
 #: openplotterMoitessier.py:191
 msgid "Moitessier HAT is attached.\n"
-msgstr "Moitessier HAT er tilknyttet.\n"
+msgstr "Moitessier HAT er tilsluttet.\n"
 
 #: openplotterMoitessier.py:197
 msgid "Your Raspberry Pi is too old!\n"
@@ -148,7 +148,7 @@ msgstr "MPU-9250 temperatur: "
 
 #: openplotterMoitessier.py:287 openplotterMoitessier.py:296
 msgid "To get accurate readings, make sure the sensor is not being read by another application."
-msgstr "For at få nøjagtige aflæsninger skal du sikre dig, at sensoren ikke læses af et andet program."
+msgstr "For at få nøjagtige aflæsninger skal du sikre dig, at sensoren ikke bruges af et andet program."
 
 #: openplotterMoitessier.py:295
 msgid "MS5607-02BA03 pressure and temperature: "
@@ -168,7 +168,7 @@ msgstr "Den aktuelle pakke understøtter ikke den aktuelle kerne. Prøv at opdat
 
 #: openplotterMoitessier.py:366
 msgid "Moitessier HAT package is not installed, please install it."
-msgstr "Moitessier HAT-pakken er ikke installeret, skal du installere den."
+msgstr "Moitessier HAT-pakken er ikke installeret, du skal installere den."
 
 #: openplotterMoitessier.py:369
 msgid " Available packages "
@@ -232,7 +232,7 @@ msgstr "Pakke hentet!"
 
 #: openplotterMoitessier.py:500
 msgid "Package not found!"
-msgstr "Pakke ikke fundet!"
+msgstr "Pakken er ikke fundet!"
 
 #: openplotterMoitessier.py:510
 msgid "Enable"
@@ -285,11 +285,11 @@ msgstr "ingen"
 
 #: openplotterMoitessier.py:627
 msgid "Failure reading HAT settings!"
-msgstr "Fejl ved læsning af HAT-indstillinger!"
+msgstr "Fejl ved indlæsning af HAT-indstillinger!"
 
 #: openplotterMoitessier.py:652
 msgid "Failure reading default_config.xml file!"
-msgstr "Fejl ved læsning af filen default_config.xml!"
+msgstr "Fejl ved indlæsning af filen default_config.xml!"
 
 #: openplotterMoitessier.py:654
 msgid "Defaults loaded. Apply changes"
@@ -301,7 +301,7 @@ msgstr "Ændringer anvendt!"
 
 #: openplotterMoitessier.py:691
 msgid "Apply changes failed!"
-msgstr "Anvend ændringer mislykkedes!"
+msgstr "Kan ikke foretage ændringer!"
 
 #: openplotterMoitessier.py:704
 msgid "Device:"
@@ -373,19 +373,19 @@ msgstr "deaktiveret"
 #: openplotterMoitessier.py:825 openplotterMoitessier.py:889
 #: openplotterMoitessier.py:1001
 msgid "Signal K connection ID = "
-msgstr "Signal K-forbindelse ID = "
+msgstr "Signal K-forbindelses ID = "
 
 #: openplotterMoitessier.py:841 openplotterMoitessier.py:905
 #: openplotterMoitessier.py:1018
 msgid "Signal K to NMEA 0183 plugin: "
-msgstr "Signal K til NMEA 0183-plugin: "
+msgstr "Signal-K til NMEA 0183-plugin: "
 
 #: openplotterMoitessier.py:845 openplotterMoitessier.py:856
 #: openplotterMoitessier.py:867 openplotterMoitessier.py:914
 #: openplotterMoitessier.py:922 openplotterMoitessier.py:933
 #: openplotterMoitessier.py:1022 openplotterMoitessier.py:1033
 msgid "enabled"
-msgstr "aktivere"
+msgstr "aktiveret"
 
 #: openplotterMoitessier.py:852 openplotterMoitessier.py:918
 msgid "Heading conversion: "
@@ -405,11 +405,11 @@ msgstr "Installer venligst openplotter- i2c appen"
 
 #: openplotterMoitessier.py:965
 msgid "I2C - Signal K key for pressure: "
-msgstr "I2C - Signal K-tast til tryk: "
+msgstr "I2C - Signal-K nøgle til tryk: "
 
 #: openplotterMoitessier.py:977
 msgid "I2C - Signal K key for temperature: "
-msgstr "I2C - Signal K-tast for temperatur: "
+msgstr "I2C - Signal-K nøgle til temperatur: "
 
 #: openplotterMoitessier.py:1029
 msgid "Pressure conversion: "
