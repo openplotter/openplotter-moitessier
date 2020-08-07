@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import wx, os, webbrowser, subprocess, ujson, sys, time
+import wx, os, webbrowser, subprocess, ujson, sys, time, configparser
 import wx.richtext as rt
 import xml.etree.ElementTree as ET
 from openplotterSettings import conf
@@ -756,21 +756,6 @@ class MyFrame(wx.Frame):
 
 		#####################################
 
-		XDRBaro = False
-		XDRNA = False
-		HDM = False
-		SKplugin = False
-		if self.platform.skDir:
-			setting_file = self.platform.skDir+'/plugin-config-data/sk-to-nmea0183.json'
-			if os.path.isfile(setting_file):
-				with open(setting_file) as data_file:
-					data = ujson.load(data_file)
-				if 'enabled' in data: SKplugin = data['enabled']
-				if 'configuration' in data:
-					if 'XDRBaro' in data['configuration']: XDRBaro = data['configuration']['XDRBaro']
-					if 'XDRNA' in data['configuration']: XDRNA = data['configuration']['XDRNA']
-					if 'HDM' in data['configuration']: HDM = data['configuration']['HDM']
-
 		self.logger.BeginTextColour((55, 55, 55))
 		self.logger.Newline()
 		self.logger.BeginBold()
@@ -837,40 +822,6 @@ class MyFrame(wx.Frame):
 			self.logger.EndTextColour()
 			self.logger.Newline()
 
-			self.logger.BeginTextColour((55, 55, 55))
-			self.logger.WriteText(_('Signal K to NMEA 0183 plugin: '))
-			self.logger.EndTextColour()
-			if SKplugin:
-				self.logger.BeginTextColour((0, 130, 0))
-				self.logger.WriteText(_('enabled'))
-			else:
-				self.logger.BeginTextColour((130, 0, 0))
-				self.logger.WriteText(_('disabled'))
-			self.logger.EndTextColour()
-			self.logger.Newline()
-			self.logger.BeginTextColour((55, 55, 55))
-			self.logger.WriteText('   '+_('Heading conversion: '))
-			self.logger.EndTextColour()
-			if HDM:
-				self.logger.BeginTextColour((0, 130, 0))
-				self.logger.WriteText(_('enabled'))
-			else:
-				self.logger.BeginTextColour((130, 0, 0))
-				self.logger.WriteText(_('disabled'))
-			self.logger.EndTextColour()
-			self.logger.Newline()
-			self.logger.BeginTextColour((55, 55, 55))
-			self.logger.WriteText('   '+_('Trim - Heel conversion: '))
-			self.logger.EndTextColour()
-			if XDRNA:
-				self.logger.BeginTextColour((0, 130, 0))
-				self.logger.WriteText(_('enabled'))
-			else:
-				self.logger.BeginTextColour((130, 0, 0))
-				self.logger.WriteText(_('disabled'))
-			self.logger.EndTextColour()
-			self.logger.Newline()
-
 		if pypilot:
 			self.logger.BeginTextColour((55, 55, 55))
 			self.logger.WriteText(_('Connection: '))
@@ -900,42 +851,6 @@ class MyFrame(wx.Frame):
 				self.logger.WriteText(_('not connected'))
 			self.logger.EndTextColour()
 			self.logger.Newline()
-
-			self.logger.BeginTextColour((55, 55, 55))
-			self.logger.WriteText(_('Signal K to NMEA 0183 plugin: '))
-			self.logger.EndTextColour()
-			if not SKplugin:
-				self.logger.BeginTextColour((0, 130, 0))
-				self.logger.WriteText(_('disabled'))
-				self.logger.EndTextColour()
-				self.logger.Newline()
-			else:
-				self.logger.BeginTextColour((130, 0, 0))
-				self.logger.WriteText(_('enabled'))
-				self.logger.EndTextColour()
-				self.logger.Newline()
-				self.logger.BeginTextColour((55, 55, 55))
-				self.logger.WriteText('   '+_('Heading conversion: '))
-				self.logger.EndTextColour()
-				if HDM:
-					self.logger.BeginTextColour((130, 0, 0))
-					self.logger.WriteText(_('enabled'))
-				else:
-					self.logger.BeginTextColour((0, 130, 0))
-					self.logger.WriteText(_('disabled'))
-				self.logger.EndTextColour()
-				self.logger.Newline()
-				self.logger.BeginTextColour((55, 55, 55))
-				self.logger.WriteText('   '+_('Trim - Heel conversion: '))
-				self.logger.EndTextColour()
-				if XDRNA:
-					self.logger.BeginTextColour((130, 0, 0))
-					self.logger.WriteText(_('enabled'))
-				else:
-					self.logger.BeginTextColour((0, 130, 0))
-					self.logger.WriteText(_('disabled'))
-				self.logger.EndTextColour()
-				self.logger.Newline()
 
 		###################################
 
@@ -1013,29 +928,57 @@ class MyFrame(wx.Frame):
 			self.logger.EndTextColour()
 			self.logger.Newline()
 
-			if pressure == 'environment.outside.pressure':
-				self.logger.BeginTextColour((55, 55, 55))
-				self.logger.WriteText(_('Signal K to NMEA 0183 plugin: '))
-				self.logger.EndTextColour()
-				if SKplugin:
-					self.logger.BeginTextColour((0, 130, 0))
-					self.logger.WriteText(_('enabled'))
-				else:
-					self.logger.BeginTextColour((130, 0, 0))
-					self.logger.WriteText(_('disabled'))
-				self.logger.EndTextColour()
-				self.logger.Newline()
-				self.logger.BeginTextColour((55, 55, 55))
-				self.logger.WriteText('   '+_('Pressure conversion: '))
-				self.logger.EndTextColour()
-				if XDRBaro:
-					self.logger.BeginTextColour((0, 130, 0))
-					self.logger.WriteText(_('enabled'))
-				else:
-					self.logger.BeginTextColour((130, 0, 0))
-					self.logger.WriteText(_('disabled'))
-				self.logger.EndTextColour()
-				self.logger.Newline()
+		###################################
+
+		self.logger.BeginTextColour((55, 55, 55))
+		self.logger.BeginBold()
+		self.logger.WriteText('OpenCPN')
+		self.logger.EndBold()
+		self.logger.Newline()
+
+		SKplugin = False
+		if self.platform.skDir:
+			setting_file = self.platform.skDir+'/plugin-config-data/sk-to-nmea0183.json'
+			if os.path.isfile(setting_file):
+				with open(setting_file) as data_file:
+					data = ujson.load(data_file)
+				if 'enabled' in data: SKplugin = data['enabled']
+		if SKplugin:
+			self.logger.BeginTextColour((55, 55, 55))
+			self.logger.WriteText(_('Before OpenCPN 5.2 you needed the Signal K plugin "Convert Signal K to NMEA 0183", now you can disable it and create a Signal K connection directly in OpenCPN.'))
+			self.logger.EndTextColour()
+			self.logger.Newline()
+
+		try:
+			confFile = self.conf.home+'/.opencpn/opencpn.conf'
+			confData = configparser.SafeConfigParser()
+			result = False
+			confData.read(confFile)
+			tmp = confData.get('Settings/NMEADataSource', 'DataConnections')
+			connections = tmp.split('|')
+			for connection in connections:
+				#0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18,19
+				#serial/network;TCP/UDP/GPSD/SK;address;port;?;serialport;bauds;?;0=input/1=input+output/2=output;?;?;?;?;?;?;?;?;enabled/disabled;comments;0=not autodiscover sk/0=autodiscover sk
+				items = connection.split(';')
+				if items[0] == '1':
+					if items[1] == '3':
+						if items[2] == 'localhost' and items[19] == '0':
+							if items[3] == self.platform.skPort:
+								if items[17] == '1': result = 'enabled'
+								else: result = 'disabled'
+			if not result:
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('The default OpenCPN connection is missing and is not getting data from Signal K. Please create this connection in OpenCPN:\nNetwork\nProtocol: Signal K\nAddress: localhost\nDataPort: '+self.platform.skPort+'\nAutomatic server discovery: not'))
+			elif result == 'disabled':
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('The default OpenCPN connection is disabled and is not getting data from Signal K. Please enable the Signal K connection in OpenCPN'))
+			elif result == 'enabled':
+				self.logger.BeginTextColour((0, 130, 0))
+				self.logger.WriteText(_('Network\nProtocol: Signal K\nAddress: localhost\nDataPort: '+self.platform.skPort+'\nAutomatic server discovery: not'))
+		except:
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('Unable to read OpenCPN configuration'))
+		self.logger.EndTextColour()
 
 ################################################################################
 
