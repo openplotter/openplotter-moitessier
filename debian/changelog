@@ -1,3 +1,11 @@
+openplotter-moitessier (2.2.0-stable) bionic; urgency=medium
+
+  * Update configuration checking process to add OpenCPN Signal K connection
+  * Update Moitesseier HAT drivers
+  * Update translations
+
+ -- Sailoog <info@sailoog.com>  Sat, 08 Aug 2020 11:53:47 +0200
+
 openplotter-moitessier (2.1.2-stable) bionic; urgency=medium
 
   * Update to Moitessier HAT driver 1.8.1
