@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2020-02-27 19:21+0100\n"
-"PO-Revision-Date: 2020-03-17 18:33+0100\n"
+"POT-Creation-Date: 2020-08-07 21:34+0200\n"
+"PO-Revision-Date: 2020-08-08 11:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -14,8 +14,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Crowdin-Project: openplotter\n"
+"X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: de\n"
 "X-Crowdin-File: openplotter-moitessier.po\n"
+"X-Crowdin-File-ID: 21\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: moitessierPostInstall.py:29
@@ -278,8 +280,8 @@ msgstr "kanal A [Hz]"
 msgid "channel B [Hz]"
 msgstr "kanal B [Hz]"
 
-#: openplotterMoitessier.py:544 openplotterMoitessier.py:972
-#: openplotterMoitessier.py:984
+#: openplotterMoitessier.py:544 openplotterMoitessier.py:887
+#: openplotterMoitessier.py:899
 msgid "none"
 msgstr "keine"
 
@@ -311,8 +313,8 @@ msgstr "Gerät:"
 msgid "Alias:"
 msgstr "Alias:"
 
-#: openplotterMoitessier.py:724 openplotterMoitessier.py:812
-#: openplotterMoitessier.py:876 openplotterMoitessier.py:988
+#: openplotterMoitessier.py:724 openplotterMoitessier.py:797
+#: openplotterMoitessier.py:827 openplotterMoitessier.py:903
 msgid "Connection: "
 msgstr "Verbindung:"
 
@@ -336,84 +338,94 @@ msgstr "Status = aktiviert"
 msgid "Status = disabled"
 msgstr "Status = deaktiviert"
 
-#: openplotterMoitessier.py:754 openplotterMoitessier.py:836
-#: openplotterMoitessier.py:900 openplotterMoitessier.py:1012
+#: openplotterMoitessier.py:754 openplotterMoitessier.py:821
+#: openplotterMoitessier.py:851 openplotterMoitessier.py:927
 msgid "not connected"
 msgstr "Nicht verbunden"
 
-#: openplotterMoitessier.py:777
+#: openplotterMoitessier.py:762
 msgid "Compass - Trim - Heel"
 msgstr "Kompass - Trimm - Krängung"
 
-#: openplotterMoitessier.py:785
+#: openplotterMoitessier.py:770
 msgid "Please install openplotter-pypilot app"
 msgstr "Bitte installieren Sie die openplotter-pypilot App"
 
-#: openplotterMoitessier.py:789
+#: openplotterMoitessier.py:774
 msgid "Pypilot mode: "
 msgstr "Pypilot-Modus: "
 
-#: openplotterMoitessier.py:802
+#: openplotterMoitessier.py:787
 msgid "only compass"
 msgstr "nur Kompass"
 
-#: openplotterMoitessier.py:803
+#: openplotterMoitessier.py:788
 msgid "autopilot"
 msgstr "autopilot"
 
-#: openplotterMoitessier.py:806 openplotterMoitessier.py:833
-#: openplotterMoitessier.py:848 openplotterMoitessier.py:859
-#: openplotterMoitessier.py:870 openplotterMoitessier.py:897
-#: openplotterMoitessier.py:909 openplotterMoitessier.py:925
-#: openplotterMoitessier.py:936 openplotterMoitessier.py:1009
-#: openplotterMoitessier.py:1025 openplotterMoitessier.py:1036
+#: openplotterMoitessier.py:791 openplotterMoitessier.py:818
+#: openplotterMoitessier.py:848 openplotterMoitessier.py:924
 msgid "disabled"
 msgstr "deaktiviert"
 
-#: openplotterMoitessier.py:825 openplotterMoitessier.py:889
-#: openplotterMoitessier.py:1001
+#: openplotterMoitessier.py:810 openplotterMoitessier.py:840
+#: openplotterMoitessier.py:916
 msgid "Signal K connection ID = "
 msgstr "Signal K Verbindungs-ID = "
 
-#: openplotterMoitessier.py:841 openplotterMoitessier.py:905
-#: openplotterMoitessier.py:1018
-msgid "Signal K to NMEA 0183 plugin: "
-msgstr "Signal K zu NMEA 0183 Plugin: "
-
-#: openplotterMoitessier.py:845 openplotterMoitessier.py:856
-#: openplotterMoitessier.py:867 openplotterMoitessier.py:914
-#: openplotterMoitessier.py:922 openplotterMoitessier.py:933
-#: openplotterMoitessier.py:1022 openplotterMoitessier.py:1033
-msgid "enabled"
-msgstr "aktiviert"
-
-#: openplotterMoitessier.py:852 openplotterMoitessier.py:918
-msgid "Heading conversion: "
-msgstr "Kurskorrektur:"
-
-#: openplotterMoitessier.py:863 openplotterMoitessier.py:929
-msgid "Trim - Heel conversion: "
-msgstr "Trimm - Krängung Korrektur:"
-
-#: openplotterMoitessier.py:944
+#: openplotterMoitessier.py:859
 msgid "Pressure - Temperature"
 msgstr "Druck - Temperatur"
 
-#: openplotterMoitessier.py:950
+#: openplotterMoitessier.py:865
 msgid "Please install openplotter-i2c app"
 msgstr "Bitte installieren Sie die openplotter-i2c App"
 
-#: openplotterMoitessier.py:965
+#: openplotterMoitessier.py:880
 msgid "I2C - Signal K key for pressure: "
 msgstr "I2C - Signal K Schlüssel für Druck: "
 
-#: openplotterMoitessier.py:977
+#: openplotterMoitessier.py:892
 msgid "I2C - Signal K key for temperature: "
 msgstr "I2C - Signal K Schlüssel für Temperatur: "
 
-#: openplotterMoitessier.py:1029
-msgid "Pressure conversion: "
-msgstr "Druckkorrektur"
+#: openplotterMoitessier.py:948
+msgid "Before OpenCPN 5.2 you needed the Signal K plugin \"Convert Signal K to NMEA 0183\", now you can disable it and create a Signal K connection directly in OpenCPN."
+msgstr "Vor OpenCPN 5.2 brauchten sie das Signal K Plugin \"Concert Signal K to NMEA 0183\", jetzt können Sie es deaktivieren und eine Signal-K-Verbindung direkt in OpenCPN erstellen."
+
+#: openplotterMoitessier.py:971
+msgid ""
+"The default OpenCPN connection is missing and is not getting data from Signal K. Please create this connection in OpenCPN:\n"
+"Network\n"
+"Protocol: Signal K\n"
+"Address: localhost\n"
+"DataPort: "
+msgstr ""
+"Die Standard-OpenCPN-Verbindung fehlt und wird nicht von Signal K abgerufen. Bitte erstellen Sie diese Verbindung in OpenCPN:\n"
+"Netzwerk\n"
+"Protokoll: Signal K\n"
+"Adresse: localhost\n"
+"DataPort: "
+
+#: openplotterMoitessier.py:974
+msgid "The default OpenCPN connection is disabled and is not getting data from Signal K. Please enable the Signal K connection in OpenCPN"
+msgstr "Die Standard OpenCPN Verbindung ist deaktiviert und wird nicht von Signal K abgerufen. Bitte aktivieren Sie die Signal K Verbindung in OpenCPN"
+
+#: openplotterMoitessier.py:977
+msgid ""
+"Network\n"
+"Protocol: Signal K\n"
+"Address: localhost\n"
+"DataPort: "
+msgstr ""
+"Netzwerk\n"
+"Protokoll: Signal K\n"
+"Adresse: localhost\n"
+"DataPort: "
+
+#: openplotterMoitessier.py:980
+msgid "Unable to read OpenCPN configuration"
+msgstr "OpenCPN Konfiguration konnte nicht gelesen werden"
 
 #: startup.py:40
 msgid "Checking Moitessier HAT..."

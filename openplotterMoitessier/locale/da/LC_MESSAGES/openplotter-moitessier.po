@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2020-02-27 19:21+0100\n"
-"PO-Revision-Date: 2020-03-17 18:33+0100\n"
+"POT-Creation-Date: 2020-08-07 21:34+0200\n"
+"PO-Revision-Date: 2020-08-08 11:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: Danish\n"
 "Language: da\n"
@@ -14,8 +14,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Crowdin-Project: openplotter\n"
+"X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: da\n"
 "X-Crowdin-File: openplotter-moitessier.po\n"
+"X-Crowdin-File-ID: 21\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: moitessierPostInstall.py:29
@@ -278,8 +280,8 @@ msgstr "kanal A [Hz]"
 msgid "channel B [Hz]"
 msgstr "kanal B [Hz]"
 
-#: openplotterMoitessier.py:544 openplotterMoitessier.py:972
-#: openplotterMoitessier.py:984
+#: openplotterMoitessier.py:544 openplotterMoitessier.py:887
+#: openplotterMoitessier.py:899
 msgid "none"
 msgstr "ingen"
 
@@ -311,8 +313,8 @@ msgstr "Enhed:"
 msgid "Alias:"
 msgstr "Alias:"
 
-#: openplotterMoitessier.py:724 openplotterMoitessier.py:812
-#: openplotterMoitessier.py:876 openplotterMoitessier.py:988
+#: openplotterMoitessier.py:724 openplotterMoitessier.py:797
+#: openplotterMoitessier.py:827 openplotterMoitessier.py:903
 msgid "Connection: "
 msgstr "Forbindelse: "
 
@@ -336,84 +338,94 @@ msgstr "Status = aktiveret"
 msgid "Status = disabled"
 msgstr "Status = deaktiveret"
 
-#: openplotterMoitessier.py:754 openplotterMoitessier.py:836
-#: openplotterMoitessier.py:900 openplotterMoitessier.py:1012
+#: openplotterMoitessier.py:754 openplotterMoitessier.py:821
+#: openplotterMoitessier.py:851 openplotterMoitessier.py:927
 msgid "not connected"
 msgstr "ikke tilsluttet"
 
-#: openplotterMoitessier.py:777
+#: openplotterMoitessier.py:762
 msgid "Compass - Trim - Heel"
 msgstr "Kompas - Trim - Hældning"
 
-#: openplotterMoitessier.py:785
+#: openplotterMoitessier.py:770
 msgid "Please install openplotter-pypilot app"
 msgstr "Installer venligst openplotter-pypilot-appen"
 
-#: openplotterMoitessier.py:789
+#: openplotterMoitessier.py:774
 msgid "Pypilot mode: "
 msgstr "Pypilot-tilstand: "
 
-#: openplotterMoitessier.py:802
+#: openplotterMoitessier.py:787
 msgid "only compass"
 msgstr "kun kompas"
 
-#: openplotterMoitessier.py:803
+#: openplotterMoitessier.py:788
 msgid "autopilot"
 msgstr "autopilot"
 
-#: openplotterMoitessier.py:806 openplotterMoitessier.py:833
-#: openplotterMoitessier.py:848 openplotterMoitessier.py:859
-#: openplotterMoitessier.py:870 openplotterMoitessier.py:897
-#: openplotterMoitessier.py:909 openplotterMoitessier.py:925
-#: openplotterMoitessier.py:936 openplotterMoitessier.py:1009
-#: openplotterMoitessier.py:1025 openplotterMoitessier.py:1036
+#: openplotterMoitessier.py:791 openplotterMoitessier.py:818
+#: openplotterMoitessier.py:848 openplotterMoitessier.py:924
 msgid "disabled"
 msgstr "deaktiveret"
 
-#: openplotterMoitessier.py:825 openplotterMoitessier.py:889
-#: openplotterMoitessier.py:1001
+#: openplotterMoitessier.py:810 openplotterMoitessier.py:840
+#: openplotterMoitessier.py:916
 msgid "Signal K connection ID = "
 msgstr "Signal K-forbindelses ID = "
 
-#: openplotterMoitessier.py:841 openplotterMoitessier.py:905
-#: openplotterMoitessier.py:1018
-msgid "Signal K to NMEA 0183 plugin: "
-msgstr "Signal-K til NMEA 0183-plugin: "
-
-#: openplotterMoitessier.py:845 openplotterMoitessier.py:856
-#: openplotterMoitessier.py:867 openplotterMoitessier.py:914
-#: openplotterMoitessier.py:922 openplotterMoitessier.py:933
-#: openplotterMoitessier.py:1022 openplotterMoitessier.py:1033
-msgid "enabled"
-msgstr "aktiveret"
-
-#: openplotterMoitessier.py:852 openplotterMoitessier.py:918
-msgid "Heading conversion: "
-msgstr "Kurs ændring: "
-
-#: openplotterMoitessier.py:863 openplotterMoitessier.py:929
-msgid "Trim - Heel conversion: "
-msgstr "Trim - Hældning ændring: "
-
-#: openplotterMoitessier.py:944
+#: openplotterMoitessier.py:859
 msgid "Pressure - Temperature"
 msgstr "Tryk - temperatur"
 
-#: openplotterMoitessier.py:950
+#: openplotterMoitessier.py:865
 msgid "Please install openplotter-i2c app"
 msgstr "Installer venligst openplotter- i2c appen"
 
-#: openplotterMoitessier.py:965
+#: openplotterMoitessier.py:880
 msgid "I2C - Signal K key for pressure: "
 msgstr "I2C - Signal-K nøgle til tryk: "
 
-#: openplotterMoitessier.py:977
+#: openplotterMoitessier.py:892
 msgid "I2C - Signal K key for temperature: "
 msgstr "I2C - Signal-K nøgle til temperatur: "
 
-#: openplotterMoitessier.py:1029
-msgid "Pressure conversion: "
-msgstr "Trykændring: "
+#: openplotterMoitessier.py:948
+msgid "Before OpenCPN 5.2 you needed the Signal K plugin \"Convert Signal K to NMEA 0183\", now you can disable it and create a Signal K connection directly in OpenCPN."
+msgstr "Før OpenCPN 5.2 havde du brug for Signal K-pluginet \"Konverter signal K til NMEA 0183\", nu kan du deaktivere det og oprette en signal K-forbindelse direkte i OpenCPN."
+
+#: openplotterMoitessier.py:971
+msgid ""
+"The default OpenCPN connection is missing and is not getting data from Signal K. Please create this connection in OpenCPN:\n"
+"Network\n"
+"Protocol: Signal K\n"
+"Address: localhost\n"
+"DataPort: "
+msgstr ""
+"Standard OpenCPN-forbindelsen mangler og modtager ikke data fra signal K. Opret denne forbindelse i OpenCPN:\n"
+"Netværk\n"
+"Protokol: Signal K\n"
+"Adresse: localhost\n"
+"dataport: "
+
+#: openplotterMoitessier.py:974
+msgid "The default OpenCPN connection is disabled and is not getting data from Signal K. Please enable the Signal K connection in OpenCPN"
+msgstr "Standard OpenCPN-forbindelsen er deaktiveret og modtager ikke data fra signal K. Aktiver venligst signal K-forbindelsen i OpenCPN"
+
+#: openplotterMoitessier.py:977
+msgid ""
+"Network\n"
+"Protocol: Signal K\n"
+"Address: localhost\n"
+"DataPort: "
+msgstr ""
+"Netværk\n"
+"Protokol: Signal K\n"
+"Adresse: localhost\n"
+"dataport: "
+
+#: openplotterMoitessier.py:980
+msgid "Unable to read OpenCPN configuration"
+msgstr "Kan ikke læse OpenCPN-konfiguration"
 
 #: startup.py:40
 msgid "Checking Moitessier HAT..."

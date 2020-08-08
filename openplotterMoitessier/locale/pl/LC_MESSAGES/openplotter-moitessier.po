@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2020-02-27 19:21+0100\n"
-"PO-Revision-Date: 2020-03-17 18:32+0100\n"
+"POT-Creation-Date: 2020-08-07 21:34+0200\n"
+"PO-Revision-Date: 2020-08-08 11:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
 "Language: pl\n"
@@ -14,45 +14,47 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Crowdin-Project: openplotter\n"
+"X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: pl\n"
 "X-Crowdin-File: openplotter-moitessier.po\n"
+"X-Crowdin-File-ID: 21\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: moitessierPostInstall.py:29
 msgid "Copying driver packages..."
-msgstr ""
+msgstr "Kopiowanie pakietów sterowników..."
 
 #: moitessierPostInstall.py:42 moitessierPostInstall.py:54
 #: moitessierPostInstall.py:60 moitessierPreUninstall.py:34
 #: moitessierPreUninstall.py:53 moitessierPreUninstall.py:59
 msgid "DONE"
-msgstr ""
+msgstr "GOTOWE"
 
 #: moitessierPostInstall.py:43 moitessierPostInstall.py:55
 #: moitessierPostInstall.py:61 moitessierPreUninstall.py:35
 #: moitessierPreUninstall.py:54 moitessierPreUninstall.py:60
 msgid "FAILED: "
-msgstr ""
+msgstr "NIEPOWODZENIE: "
 
 #: moitessierPostInstall.py:45
 msgid "Modifying config.txt..."
-msgstr ""
+msgstr "Modyfikowanie config.txt..."
 
 #: moitessierPostInstall.py:57
 msgid "Setting version..."
-msgstr ""
+msgstr "Ustawianie wersji..."
 
 #: moitessierPreUninstall.py:29
 msgid "Removing drivers packages..."
-msgstr ""
+msgstr "Usuwanie pakietów sterowników..."
 
 #: moitessierPreUninstall.py:37
 msgid "Uninstalling drivers..."
-msgstr ""
+msgstr "Odinstalowywanie sterowników..."
 
 #: moitessierPreUninstall.py:56
 msgid "Removing version..."
-msgstr ""
+msgstr "Usuwanie wersji..."
 
 #: openplotterMoitessier.py:47
 msgid "Help"
@@ -92,15 +94,15 @@ msgstr "Statystyki"
 
 #: openplotterMoitessier.py:156
 msgid "Reset"
-msgstr ""
+msgstr "Reset"
 
 #: openplotterMoitessier.py:160
 msgid "Check IMU temperature"
-msgstr ""
+msgstr "Sprawdź temperaturę IMU"
 
 #: openplotterMoitessier.py:162
 msgid "Check pressure"
-msgstr ""
+msgstr "Sprawdź ciśnienie"
 
 #: openplotterMoitessier.py:182 openplotterMoitessier.py:187
 msgid "Moitessier HAT is not attached!\n"
@@ -140,7 +142,7 @@ msgstr "Pakiet Moitessier HAT jest zainstalowany.\n"
 
 #: openplotterMoitessier.py:242
 msgid "The installed package does not support the current kernel version, go to \"Drivers\" tab to update it.\n"
-msgstr ""
+msgstr "Zainstalowany pakiet nie obsługuje bieżącej wersji kernelu, przejdź do zakładki \"Sterowniki\" aby zaktualizować.\n"
 
 #: openplotterMoitessier.py:286
 msgid "MPU-9250 temperature: "
@@ -160,7 +162,7 @@ msgstr " Bieżąca wersja jądra "
 
 #: openplotterMoitessier.py:342
 msgid " Supported versions "
-msgstr ""
+msgstr " Wspierane wersje "
 
 #: openplotterMoitessier.py:361
 msgid "The current package does not support the current kernel. Try to update the package. If you do not find a suitable package contact us at https://rooco.eu"
@@ -196,11 +198,11 @@ msgstr "Wybierz pakiet do zainstalowania."
 
 #: openplotterMoitessier.py:432
 msgid "After installing the selected package, OpenPlotter will restart. Are you sure?"
-msgstr ""
+msgstr "Po zainstalowaniu wybranego pakietu OpenPlotter zostanie zrestartowany. Czy jesteś pewien?"
 
 #: openplotterMoitessier.py:433 openplotterMoitessier.py:459
 msgid "Question"
-msgstr ""
+msgstr "Pytanie"
 
 #: openplotterMoitessier.py:441
 msgid "Updating Moitessier Hat modules and firmware..."
@@ -208,11 +210,11 @@ msgstr "Aktualizowanie modułów Moitessier HAT i firmware..."
 
 #: openplotterMoitessier.py:451
 msgid "Installing package data, please wait... "
-msgstr ""
+msgstr "Instalowanie pakietu, proszę czekać... "
 
 #: openplotterMoitessier.py:458
 msgid "After uninstalling the package, OpenPlotter will restart. Are you sure?"
-msgstr ""
+msgstr "Po odinstalowaniu pakietu OpenPlotter zostanie zostanie zrestartowany. Czy jesteś pewien?"
 
 #: openplotterMoitessier.py:470
 msgid "Removing Moitessier Hat drivers, please wait... "
@@ -236,15 +238,15 @@ msgstr "Nie znaleziono pakietu!"
 
 #: openplotterMoitessier.py:510
 msgid "Enable"
-msgstr ""
+msgstr "Włącz"
 
 #: openplotterMoitessier.py:513
 msgid "Disable"
-msgstr ""
+msgstr "Wyłącz"
 
 #: openplotterMoitessier.py:516
 msgid " General "
-msgstr ""
+msgstr " Główne "
 
 #: openplotterMoitessier.py:518
 msgid "Reset HAT"
@@ -260,7 +262,7 @@ msgstr "włącz symulator"
 
 #: openplotterMoitessier.py:528
 msgid "interval (ms)"
-msgstr ""
+msgstr "interwał (ms)"
 
 #: openplotterMoitessier.py:531
 msgid "MMSI boat 1"
@@ -278,154 +280,164 @@ msgstr "kanał A [Hz]"
 msgid "channel B [Hz]"
 msgstr "kanał B [Hz]"
 
-#: openplotterMoitessier.py:544 openplotterMoitessier.py:972
-#: openplotterMoitessier.py:984
+#: openplotterMoitessier.py:544 openplotterMoitessier.py:887
+#: openplotterMoitessier.py:899
 msgid "none"
-msgstr ""
+msgstr "brak"
 
 #: openplotterMoitessier.py:627
 msgid "Failure reading HAT settings!"
-msgstr ""
+msgstr "Błąd odczytu ustawień HAT!"
 
 #: openplotterMoitessier.py:652
 msgid "Failure reading default_config.xml file!"
-msgstr ""
+msgstr "Błąd odczytu pliku default_config.xml!"
 
 #: openplotterMoitessier.py:654
 msgid "Defaults loaded. Apply changes"
-msgstr ""
+msgstr "Domyślnie załadowane. Zastosuj zmiany"
 
 #: openplotterMoitessier.py:689
 msgid "Changes applied!"
-msgstr ""
+msgstr "Zmiany zastosowane!"
 
 #: openplotterMoitessier.py:691
 msgid "Apply changes failed!"
-msgstr ""
+msgstr "Zastosowanie zmian zakończyło się niepowodzeniem!"
 
 #: openplotterMoitessier.py:704
 msgid "Device:"
-msgstr ""
+msgstr "Urządzenie:"
 
 #: openplotterMoitessier.py:721
 msgid "Alias:"
-msgstr ""
+msgstr "Alias:"
 
-#: openplotterMoitessier.py:724 openplotterMoitessier.py:812
-#: openplotterMoitessier.py:876 openplotterMoitessier.py:988
+#: openplotterMoitessier.py:724 openplotterMoitessier.py:797
+#: openplotterMoitessier.py:827 openplotterMoitessier.py:903
 msgid "Connection: "
-msgstr ""
+msgstr "Połączenie: "
 
 #: openplotterMoitessier.py:734 openplotterMoitessier.py:741
 msgid "App = "
-msgstr ""
+msgstr "Aplikacja = "
 
 #: openplotterMoitessier.py:734 openplotterMoitessier.py:741
 msgid "Device = "
-msgstr ""
+msgstr "Urządzenie = "
 
 #: openplotterMoitessier.py:734 openplotterMoitessier.py:741
 msgid "ID = "
-msgstr ""
+msgstr "ID = "
 
 #: openplotterMoitessier.py:735 openplotterMoitessier.py:742
 msgid "Status = enabled"
-msgstr ""
+msgstr "Status = włączony"
 
 #: openplotterMoitessier.py:738 openplotterMoitessier.py:743
 msgid "Status = disabled"
-msgstr ""
+msgstr "Status = włączony"
 
-#: openplotterMoitessier.py:754 openplotterMoitessier.py:836
-#: openplotterMoitessier.py:900 openplotterMoitessier.py:1012
+#: openplotterMoitessier.py:754 openplotterMoitessier.py:821
+#: openplotterMoitessier.py:851 openplotterMoitessier.py:927
 msgid "not connected"
-msgstr ""
+msgstr "nie podłączono"
 
-#: openplotterMoitessier.py:777
+#: openplotterMoitessier.py:762
 msgid "Compass - Trim - Heel"
-msgstr ""
+msgstr "Kompas - przegłębienie - przechył"
 
-#: openplotterMoitessier.py:785
+#: openplotterMoitessier.py:770
 msgid "Please install openplotter-pypilot app"
-msgstr ""
+msgstr "Proszę zainstalować aplikację openplotter-pypilot"
 
-#: openplotterMoitessier.py:789
+#: openplotterMoitessier.py:774
 msgid "Pypilot mode: "
-msgstr ""
+msgstr "Tryb aplikacji Pypilot: "
 
-#: openplotterMoitessier.py:802
+#: openplotterMoitessier.py:787
 msgid "only compass"
 msgstr "tylko kompas"
 
-#: openplotterMoitessier.py:803
+#: openplotterMoitessier.py:788
 msgid "autopilot"
 msgstr "autopilot"
 
-#: openplotterMoitessier.py:806 openplotterMoitessier.py:833
-#: openplotterMoitessier.py:848 openplotterMoitessier.py:859
-#: openplotterMoitessier.py:870 openplotterMoitessier.py:897
-#: openplotterMoitessier.py:909 openplotterMoitessier.py:925
-#: openplotterMoitessier.py:936 openplotterMoitessier.py:1009
-#: openplotterMoitessier.py:1025 openplotterMoitessier.py:1036
+#: openplotterMoitessier.py:791 openplotterMoitessier.py:818
+#: openplotterMoitessier.py:848 openplotterMoitessier.py:924
 msgid "disabled"
-msgstr ""
+msgstr "wyłączony"
 
-#: openplotterMoitessier.py:825 openplotterMoitessier.py:889
-#: openplotterMoitessier.py:1001
+#: openplotterMoitessier.py:810 openplotterMoitessier.py:840
+#: openplotterMoitessier.py:916
 msgid "Signal K connection ID = "
-msgstr ""
+msgstr "ID połączenia Signal K "
 
-#: openplotterMoitessier.py:841 openplotterMoitessier.py:905
-#: openplotterMoitessier.py:1018
-msgid "Signal K to NMEA 0183 plugin: "
-msgstr ""
-
-#: openplotterMoitessier.py:845 openplotterMoitessier.py:856
-#: openplotterMoitessier.py:867 openplotterMoitessier.py:914
-#: openplotterMoitessier.py:922 openplotterMoitessier.py:933
-#: openplotterMoitessier.py:1022 openplotterMoitessier.py:1033
-msgid "enabled"
-msgstr ""
-
-#: openplotterMoitessier.py:852 openplotterMoitessier.py:918
-msgid "Heading conversion: "
-msgstr ""
-
-#: openplotterMoitessier.py:863 openplotterMoitessier.py:929
-msgid "Trim - Heel conversion: "
-msgstr ""
-
-#: openplotterMoitessier.py:944
+#: openplotterMoitessier.py:859
 msgid "Pressure - Temperature"
-msgstr ""
+msgstr "Ciśnienie - Temperatura"
 
-#: openplotterMoitessier.py:950
+#: openplotterMoitessier.py:865
 msgid "Please install openplotter-i2c app"
-msgstr ""
+msgstr "Proszę zainstalować aplikację openplotter-i2c"
 
-#: openplotterMoitessier.py:965
+#: openplotterMoitessier.py:880
 msgid "I2C - Signal K key for pressure: "
+msgstr "Wyróżnik (key) I2C – Signal K dla ciśnienia: "
+
+#: openplotterMoitessier.py:892
+msgid "I2C - Signal K key for temperature: "
+msgstr "Wyróżnik (klucz) I2C – Signal K dla temperatury: "
+
+#: openplotterMoitessier.py:948
+msgid "Before OpenCPN 5.2 you needed the Signal K plugin \"Convert Signal K to NMEA 0183\", now you can disable it and create a Signal K connection directly in OpenCPN."
+msgstr "Poniżej wersji 5.2 OpenCPN konieczna była wtyczka SignalK \"Convert SignalK to NMEA 0183\", obecnie możesz ją wyłczyć i utworzyć połączenie SignalK bezpośrednio w OpenCPN."
+
+#: openplotterMoitessier.py:971
+msgid ""
+"The default OpenCPN connection is missing and is not getting data from Signal K. Please create this connection in OpenCPN:\n"
+"Network\n"
+"Protocol: Signal K\n"
+"Address: localhost\n"
+"DataPort: "
 msgstr ""
+"Domyślne połączenie w OpenCPN nie istnieje i otrzymywanie danych z SignalK nie będzie możliwe. Proszę dodać to połączenie w OpenCPN:\n"
+"Protokół \n"
+"sieciowy: SignalK\n"
+"Adres: localhost\n"
+"Port danych: "
+
+#: openplotterMoitessier.py:974
+msgid "The default OpenCPN connection is disabled and is not getting data from Signal K. Please enable the Signal K connection in OpenCPN"
+msgstr "Domyślne połączenie OpenCPN jest wyłączone i nie pobiera danych z Signal K. Proszę włączyć połączenie Signal K w OpenCPN"
 
 #: openplotterMoitessier.py:977
-msgid "I2C - Signal K key for temperature: "
+msgid ""
+"Network\n"
+"Protocol: Signal K\n"
+"Address: localhost\n"
+"DataPort: "
 msgstr ""
+"Protokół \n"
+"sieciowy: SignalK\n"
+"Adres: localhost\n"
+"Port danych: "
 
-#: openplotterMoitessier.py:1029
-msgid "Pressure conversion: "
-msgstr ""
+#: openplotterMoitessier.py:980
+msgid "Unable to read OpenCPN configuration"
+msgstr "Nie można odczytać konfiguracji OpenCPN"
 
 #: startup.py:40
 msgid "Checking Moitessier HAT..."
-msgstr ""
+msgstr "Sprawdzanie Moitessier HAT..."
 
 #: startup.py:49 startup.py:51
 msgid "not attached"
-msgstr ""
+msgstr "niepodłączony"
 
 #: startup.py:52
 msgid "attached"
-msgstr ""
+msgstr "podłączony"
 
 #: startup.py:56
 msgid "Your Raspberry Pi is too old!"
@@ -453,8 +465,8 @@ msgstr "Pakiet Moitessier HAT nie jest zainstalowany."
 
 #: startup.py:84
 msgid "package installed"
-msgstr ""
+msgstr "pakiet zainstalowany"
 
 #: startup.py:95
 msgid "The installed package does not support the current kernel version, go to Moitessier HAT app to update it."
-msgstr ""
+msgstr "Zainstalowany pakiet nie obsługuje bieżącej wersji kernelu, przejdź do aplikacji Moitessier HAT aby go zaktualizować."
