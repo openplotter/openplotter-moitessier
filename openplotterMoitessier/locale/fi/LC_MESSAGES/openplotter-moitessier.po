@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2020-08-07 21:34+0200\n"
-"PO-Revision-Date: 2020-08-08 11:51+0200\n"
+"PO-Revision-Date: 2020-10-19 18:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -391,7 +391,7 @@ msgstr "I2C - Signal K nappi lämpötilalle: "
 
 #: openplotterMoitessier.py:948
 msgid "Before OpenCPN 5.2 you needed the Signal K plugin \"Convert Signal K to NMEA 0183\", now you can disable it and create a Signal K connection directly in OpenCPN."
-msgstr ""
+msgstr "Ennen OpenCPN 5.2 tarvitsit Signal K lisäosan \"Muuta Signal K NMEA 0183:ksi\", nyt voit poistaa sen ja muodostaa suoran Signal K yhteyden OpenCPN:ään."
 
 #: openplotterMoitessier.py:971
 msgid ""
@@ -401,10 +401,15 @@ msgid ""
 "Address: localhost\n"
 "DataPort: "
 msgstr ""
+"Vakio OpenCPN kytkentä puuttuu, eikä saa dataa Signal K:sta. Muodosta tämä kytkentä OpenCPN:ssä\n"
+"Network \n"
+"Protcol: Signal K\n"
+"Adress: localhost\n"
+"Data Port: "
 
 #: openplotterMoitessier.py:974
 msgid "The default OpenCPN connection is disabled and is not getting data from Signal K. Please enable the Signal K connection in OpenCPN"
-msgstr ""
+msgstr "Vakio OpenCPN kytkentä on estetty, eikä saa dataa Signal K: sta. Salli Signal K kytkentä OpenCPN:ssä"
 
 #: openplotterMoitessier.py:977
 msgid ""
@@ -413,10 +418,14 @@ msgid ""
 "Address: localhost\n"
 "DataPort: "
 msgstr ""
+"Network\n"
+"Protocol: Signal K\n"
+"Address: localhost\n"
+"DataPort: "
 
 #: openplotterMoitessier.py:980
 msgid "Unable to read OpenCPN configuration"
-msgstr ""
+msgstr "OpenCPN kokoonpanon luku ei onnistu"
 
 #: startup.py:40
 msgid "Checking Moitessier HAT..."

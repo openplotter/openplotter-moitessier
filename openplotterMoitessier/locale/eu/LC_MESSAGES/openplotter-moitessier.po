@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
 "POT-Creation-Date: 2020-08-07 21:34+0200\n"
-"PO-Revision-Date: 2020-08-08 11:51+0200\n"
+"PO-Revision-Date: 2020-08-08 09:47\n"
 "Last-Translator: \n"
 "Language-Team: Basque\n"
 "Language: eu\n"
@@ -13,12 +13,12 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
 "X-Crowdin-Project: openplotter\n"
 "X-Crowdin-Project-ID: 289888\n"
 "X-Crowdin-Language: eu\n"
 "X-Crowdin-File: openplotter-moitessier.po\n"
 "X-Crowdin-File-ID: 21\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: moitessierPostInstall.py:29
 msgid "Copying driver packages..."
@@ -394,8 +394,7 @@ msgid "Before OpenCPN 5.2 you needed the Signal K plugin \"Convert Signal K to N
 msgstr ""
 
 #: openplotterMoitessier.py:971
-msgid ""
-"The default OpenCPN connection is missing and is not getting data from Signal K. Please create this connection in OpenCPN:\n"
+msgid "The default OpenCPN connection is missing and is not getting data from Signal K. Please create this connection in OpenCPN:\n"
 "Network\n"
 "Protocol: Signal K\n"
 "Address: localhost\n"
@@ -407,8 +406,7 @@ msgid "The default OpenCPN connection is disabled and is not getting data from S
 msgstr ""
 
 #: openplotterMoitessier.py:977
-msgid ""
-"Network\n"
+msgid "Network\n"
 "Protocol: Signal K\n"
 "Address: localhost\n"
 "DataPort: "
@@ -461,3 +459,4 @@ msgstr ""
 #: startup.py:95
 msgid "The installed package does not support the current kernel version, go to Moitessier HAT app to update it."
 msgstr ""
+
