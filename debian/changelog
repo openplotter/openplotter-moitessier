@@ -1,3 +1,10 @@
+openplotter-moitessier (2.4.0-stable) bionic; urgency=medium
+
+  * Remove dtoverlay at install
+  * Update translations 
+
+ -- Sailoog <info@sailoog.com>  Mon, 02 Nov 2020 17:49:28 +0100
+
 openplotter-moitessier (2.3.0-stable) bionic; urgency=medium
 
   * Add GPIO management
