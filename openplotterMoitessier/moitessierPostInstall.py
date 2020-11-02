@@ -42,18 +42,6 @@ def main():
 		print(_('DONE'))
 	except Exception as e: print(_('FAILED: ')+str(e))
 
-	print(_('Modifying config.txt...'))
-	try:
-		exists = False
-		with open('/boot/config.txt') as f:
-			if 'dtoverlay=i2c-gpio,i2c_gpio_sda=2,i2c_gpio_scl=3,bus=3' in f.read(): exists = True
-		if not exists:
-			with open('/boot/config.txt', 'a') as file:
-				file.write('dtoverlay=i2c-gpio,i2c_gpio_sda=2,i2c_gpio_scl=3,bus=3')
-
-		print(_('DONE'))
-	except Exception as e: print(_('FAILED: ')+str(e))
-
 	print(_('Setting version...'))
 	try:
 		conf2.set('APPS', 'moitessier', version)
