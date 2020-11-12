@@ -52,18 +52,16 @@ class Check():
 			else: green =_('attached')
 
 		try:
-			subprocess.check_output(['i2cdetect', '-y', '0']).decode(sys.stdin.encoding)
-			red = _('Your Raspberry Pi is too old!')
-		except:
-			try:
-				subprocess.check_output(['i2cdetect', '-y', '1']).decode(sys.stdin.encoding)
+			out = subprocess.check_output('ls /dev/i2c*', shell=True).decode(sys.stdin.encoding)
+			if '/dev/i2c-0' in out: red = _('Your Raspberry Pi is too old!')
+			if '/dev/i2c-1' in out:
 				txt = _('I2C enabled')
 				if not black: black = txt
 				else: black += ' | '+txt
-			except:
-				txt = _('I2C is disabled. Please enable I2C interface in Preferences -> Raspberry Pi configuration -> Interfaces.')
-				if not red: red = txt
-				else: red += '\n'+txt
+		except:
+			txt = _('I2C is disabled. Please enable I2C interface in Preferences -> Raspberry Pi configuration -> Interfaces.')
+			if not red: red = txt
+			else: red += '\n'+txt
 
 		spi_bcm2835 = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
 		if 'spi_bcm2835' in spi_bcm2835:

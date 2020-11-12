@@ -86,7 +86,9 @@ class MyFrame(wx.Frame):
 		self.pageSettings()
 		self.pageOutput()
 
-		try: subprocess.check_output(['i2cdetect', '-y', '1']).decode(sys.stdin.encoding)
+		try:
+			out = subprocess.check_output('ls /dev/i2c*', shell=True).decode(sys.stdin.encoding)
+			if '/dev/i2c-0' in out: self.button_install.Disable()
 		except: self.button_install.Disable()
 
 		spi_bcm2835 = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
@@ -190,23 +192,22 @@ class MyFrame(wx.Frame):
 				self.logger.BeginTextColour((0, 130, 0))
 				self.logger.WriteText(_('Moitessier HAT is attached.\n'))
 				self.logger.EndTextColour()
-
+				
 		try:
-			subprocess.check_output(['i2cdetect', '-y', '0']).decode(sys.stdin.encoding)
-			self.logger.BeginTextColour((130, 0, 0))
-			self.logger.WriteText(_('Your Raspberry Pi is too old!\n'))
-			self.logger.EndTextColour()
-		except:
-			try:
-				subprocess.check_output(['i2cdetect', '-y', '1']).decode(sys.stdin.encoding)
+			out = subprocess.check_output('ls /dev/i2c*', shell=True).decode(sys.stdin.encoding)
+			if '/dev/i2c-0' in out:
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('Your Raspberry Pi is too old!\n'))
+				self.logger.EndTextColour()
+			if '/dev/i2c-1' in out:
 				self.logger.BeginTextColour((0, 130, 0))
 				self.logger.WriteText(_('I2C is enabled.\n'))
 				self.logger.EndTextColour()
-			except:
-				self.logger.BeginTextColour((130, 0, 0))
-				self.logger.WriteText(_('I2C is disabled. Please enable I2C interface in Preferences -> Raspberry Pi configuration -> Interfaces.\n'))
-				self.logger.EndTextColour()
-				button_install = False
+		except:
+			self.logger.BeginTextColour((130, 0, 0))
+			self.logger.WriteText(_('I2C is disabled. Please enable I2C interface in Preferences -> Raspberry Pi configuration -> Interfaces.\n'))
+			self.logger.EndTextColour()
+			button_install = False
 
 		spi_bcm2835 = subprocess.check_output('lsmod').decode(sys.stdin.encoding)
 		if 'spi_bcm2835' in spi_bcm2835:
