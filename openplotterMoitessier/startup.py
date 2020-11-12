@@ -44,12 +44,15 @@ class Check():
 		black = '' 
 		red = '' 
 
+		attached = False
 		try:
 			out = subprocess.check_output(['more','product'],cwd='/proc/device-tree/hat').decode(sys.stdin.encoding)
 		except: black =_('not attached')
 		else:
 			if not 'Moitessier' in out: black =_('not attached')
-			else: green =_('attached')
+			else: 
+				green =_('attached')
+				attached = True
 
 		try:
 			out = subprocess.check_output('ls /dev/i2c*', shell=True).decode(sys.stdin.encoding)
@@ -79,9 +82,13 @@ class Check():
 			if not red: red = txt
 			else: red += '\n'+txt
 		else:
-			txt = _('package installed')
+			txt = _('driver installed')
 			if not black: black = txt
 			else: black += ' | '+txt
+			if not attached:
+				txt = _('Moitessier HAT is not attached, uninstall the driver if you are not using this HAT')
+				if not red: red = txt
+				else: red += '\n'+txt
 
 			packages = os.listdir(modulesPath)
 			kernel = subprocess.check_output(['uname','-r']).decode(sys.stdin.encoding)
@@ -90,7 +97,7 @@ class Check():
 			for i in packages:
 				if 'moitessier_'+kernel+'.ko' == i: supported = True
 			if not supported:
-				txt = _('The installed package does not support the current kernel version, go to Moitessier HAT app to update it.')
+				txt = _('The installed driver does not support the current kernel version, go to Moitessier HAT app to update it.')
 				if not red: red = txt
 				else: red += '\n'+txt
 

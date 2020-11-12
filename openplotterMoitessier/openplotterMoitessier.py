@@ -177,6 +177,7 @@ class MyFrame(wx.Frame):
 		self.logger.Clear()
 		self.notebook.ChangeSelection(3)
 		self.logger.BeginBold()
+		attached = False
 		try:
 			out = subprocess.check_output(['more','product'],cwd='/proc/device-tree/hat').decode(sys.stdin.encoding)
 		except:
@@ -192,6 +193,7 @@ class MyFrame(wx.Frame):
 				self.logger.BeginTextColour((0, 130, 0))
 				self.logger.WriteText(_('Moitessier HAT is attached.\n'))
 				self.logger.EndTextColour()
+				attached = True
 				
 		try:
 			out = subprocess.check_output('ls /dev/i2c*', shell=True).decode(sys.stdin.encoding)
@@ -223,13 +225,21 @@ class MyFrame(wx.Frame):
 		modulesPath = self.conf.home+'/moitessier/modules'
 		if not os.path.exists(modulesPath):
 			self.logger.BeginTextColour((130, 0, 0))
-			self.logger.WriteText(_('Moitessier HAT package is not installed!\n'))
+			self.logger.WriteText(_('Moitessier HAT driver is not installed!\n'))
 			self.logger.EndTextColour()
 			self.logger.EndBold()
 		else:
 			self.logger.BeginTextColour((0, 130, 0))
-			self.logger.WriteText(_('Moitessier HAT package is installed.\n'))
+			self.logger.WriteText(_('Moitessier HAT driver is installed.\n'))
 			self.logger.EndTextColour()
+			self.logger.EndBold()
+			if not attached:
+				self.logger.BeginBold()
+				self.logger.BeginTextColour((130, 0, 0))
+				self.logger.WriteText(_('Moitessier HAT is not attached, uninstall the driver if you are not using this HAT')+'\n')
+				self.logger.EndTextColour()
+				self.logger.EndBold()
+
 			driver = subprocess.check_output(['dpkg','-s','moitessier']).decode(sys.stdin.encoding)
 			packages = os.listdir(modulesPath)
 			packages.sort()
@@ -242,7 +252,6 @@ class MyFrame(wx.Frame):
 				self.logger.BeginTextColour((130, 0, 0))
 				self.logger.WriteText(_('The installed package does not support the current kernel version, go to "Drivers" tab to update it.\n'))
 				self.logger.EndTextColour()
-			self.logger.EndBold()
 			self.logger.BeginTextColour((55, 55, 55))
 			self.logger.WriteText(driver)
 			self.logger.EndTextColour()
