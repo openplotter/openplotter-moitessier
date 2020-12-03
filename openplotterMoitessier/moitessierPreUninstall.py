@@ -38,7 +38,13 @@ def main():
 	try:
 		subprocess.call(['dpkg', '-r', 'moitessier'])
 
-		file = open('/boot/config.txt', 'r')
+		config = '/boot/config.txt'
+		boot = '/boot'
+		try: file = open(config, 'r')
+		except:
+			config = '/boot/firmware/config.txt'
+			boot = '/boot/firmware'
+			file = open(config, 'r')
 		file1 = open('config.txt', 'w')
 		while True:
 			line = file.readline()
@@ -47,7 +53,7 @@ def main():
 			else: file1.write(line)
 		file.close()
 		file1.close()
-		if os.system('diff config.txt /boot/config.txt > /dev/null'): os.system('mv config.txt /boot')
+		if os.system('diff config.txt '+config+' > /dev/null'): os.system('mv config.txt '+boot)
 		else: os.system('rm -f config.txt')
 
 		print(_('DONE'))

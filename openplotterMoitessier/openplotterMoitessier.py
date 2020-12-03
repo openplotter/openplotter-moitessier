@@ -481,7 +481,13 @@ class MyFrame(wx.Frame):
 					self.logger.ShowPosition(self.logger.GetLastPosition())
 			self.logger.EndTextColour()
 
-			file = open('/boot/config.txt', 'r')
+			config = '/boot/config.txt'
+			boot = '/boot'
+			try: file = open(config, 'r')
+			except:
+				config = '/boot/firmware/config.txt'
+				boot = '/boot/firmware'
+				file = open(config, 'r')
 			file1 = open('config.txt', 'w')
 			exists = False
 			while True:
@@ -491,9 +497,8 @@ class MyFrame(wx.Frame):
 				else: file1.write(line)
 			file.close()
 			file1.close()
-			if os.system('diff config.txt /boot/config.txt > /dev/null'):
-				os.system(self.platform.admin+' mv config.txt /boot')
-			else: os.system(self.platform.admin+' rm -f config.txt')
+			if os.system('diff config.txt '+config+' > /dev/null'): os.system(self.platform.admin+' mv config.txt '+boot)
+			else: os.system('rm -f config.txt')
 			self.ShowStatusBarYELLOW(_('Moitessier Hat drivers removed.'))
 			os.system('shutdown -r now')
 		dlg.Destroy()
