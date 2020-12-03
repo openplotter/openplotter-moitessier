@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter\n"
-"POT-Creation-Date: 2020-08-07 21:34+0200\n"
-"PO-Revision-Date: 2020-11-02 17:47+0100\n"
+"POT-Creation-Date: 2020-11-12 19:54+0100\n"
+"PO-Revision-Date: 2020-12-03 21:20+0100\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi\n"
@@ -24,23 +24,19 @@ msgstr ""
 msgid "Copying driver packages..."
 msgstr "Kopioidaan ajuripaketteja..."
 
-#: moitessierPostInstall.py:42 moitessierPostInstall.py:54
-#: moitessierPostInstall.py:60 moitessierPreUninstall.py:34
-#: moitessierPreUninstall.py:53 moitessierPreUninstall.py:59
+#: moitessierPostInstall.py:42 moitessierPostInstall.py:48
+#: moitessierPreUninstall.py:34 moitessierPreUninstall.py:53
+#: moitessierPreUninstall.py:59
 msgid "DONE"
 msgstr "VALMIS"
 
-#: moitessierPostInstall.py:43 moitessierPostInstall.py:55
-#: moitessierPostInstall.py:61 moitessierPreUninstall.py:35
-#: moitessierPreUninstall.py:54 moitessierPreUninstall.py:60
+#: moitessierPostInstall.py:43 moitessierPostInstall.py:49
+#: moitessierPreUninstall.py:35 moitessierPreUninstall.py:54
+#: moitessierPreUninstall.py:60
 msgid "FAILED: "
 msgstr "EPÄONNISTUNUT: "
 
 #: moitessierPostInstall.py:45
-msgid "Modifying config.txt..."
-msgstr "Muotoillaan config.txt..."
-
-#: moitessierPostInstall.py:57
 msgid "Setting version..."
 msgstr "Asetetaan versio..."
 
@@ -76,324 +72,332 @@ msgstr "Peru muutokset"
 msgid "Drivers"
 msgstr "Ajurit"
 
-#: openplotterMoitessier.py:146
+#: openplotterMoitessier.py:148
 msgid "Check System"
 msgstr "Tarkista järjestelmä"
 
-#: openplotterMoitessier.py:148
+#: openplotterMoitessier.py:150
 msgid "Check configuration"
 msgstr "Tarkista kokoonpano"
 
-#: openplotterMoitessier.py:151
+#: openplotterMoitessier.py:153
 msgid "Check Settings"
 msgstr "Tarkista asetukset"
 
-#: openplotterMoitessier.py:154
+#: openplotterMoitessier.py:156
 msgid "Statistics"
 msgstr "Tilastot"
 
-#: openplotterMoitessier.py:156
+#: openplotterMoitessier.py:158
 msgid "Reset"
 msgstr "Palauta"
 
-#: openplotterMoitessier.py:160
+#: openplotterMoitessier.py:162
 msgid "Check IMU temperature"
 msgstr "Tarkista IMU lämpötila"
 
-#: openplotterMoitessier.py:162
+#: openplotterMoitessier.py:164
 msgid "Check pressure"
 msgstr "Tarkista paine"
 
-#: openplotterMoitessier.py:182 openplotterMoitessier.py:187
+#: openplotterMoitessier.py:185 openplotterMoitessier.py:190
 msgid "Moitessier HAT is not attached!\n"
 msgstr "Moitessier HAT ei ole liitetty!\n"
 
-#: openplotterMoitessier.py:191
+#: openplotterMoitessier.py:194
 msgid "Moitessier HAT is attached.\n"
 msgstr "Moitessier HAT on liitetty.\n"
 
-#: openplotterMoitessier.py:197
+#: openplotterMoitessier.py:202
 msgid "Your Raspberry Pi is too old!\n"
 msgstr "Raspberry Pi: si on liian vanha!\n"
 
-#: openplotterMoitessier.py:203
+#: openplotterMoitessier.py:206
 msgid "I2C is enabled.\n"
 msgstr "I2C on sallittu.\n"
 
-#: openplotterMoitessier.py:207
+#: openplotterMoitessier.py:210
 msgid "I2C is disabled. Please enable I2C interface in Preferences -> Raspberry Pi configuration -> Interfaces.\n"
 msgstr "I2C on estetty. Salli I2C liityntä Valinnat -> Raspberry Pi asetukset -> liitokset kohdassa.\n"
 
-#: openplotterMoitessier.py:214
+#: openplotterMoitessier.py:217
 msgid "SPI is enabled.\n"
 msgstr "SPI on sallittu.\n"
 
-#: openplotterMoitessier.py:218
+#: openplotterMoitessier.py:221
 msgid "SPI is disabled. Please enable SPI interface in Preferences -> Raspberry Pi configuration -> Interfaces.\n"
 msgstr "I2C on estetty. Salli I2C liityntä Valinnat -> Raspberry Pi asetukset -> liitokset kohdassa.\n"
 
-#: openplotterMoitessier.py:225 openplotterMoitessier.py:324
-msgid "Moitessier HAT package is not installed!\n"
-msgstr "Moitessier HAT paketti ei ole asennettu!\n"
+#: openplotterMoitessier.py:228
+msgid "Moitessier HAT driver is not installed!\n"
+msgstr "Moitessier HAT ajuri ei ole asennettu!\n"
 
-#: openplotterMoitessier.py:230
-msgid "Moitessier HAT package is installed.\n"
-msgstr "Moitessier HAT paketti on asennettu.\n"
+#: openplotterMoitessier.py:233
+msgid "Moitessier HAT driver is installed.\n"
+msgstr "Moitessier HAT ajuri on asennettu.\n"
 
-#: openplotterMoitessier.py:242
+#: openplotterMoitessier.py:239 startup.py:89
+msgid "Moitessier HAT is not attached, uninstall the driver if you are not using this HAT"
+msgstr "Moitessier HAT ei ole liitetty, poista ajuri, jos et käytä tätä HATtua"
+
+#: openplotterMoitessier.py:253
 msgid "The installed package does not support the current kernel version, go to \"Drivers\" tab to update it.\n"
 msgstr "Asennettu paketti ei tue tätä kernelin versiota, päivitä se \"Drivers\" välilehdellä.\n"
 
-#: openplotterMoitessier.py:286
+#: openplotterMoitessier.py:296
 msgid "MPU-9250 temperature: "
 msgstr "MPU-9250 lämpötila: "
 
-#: openplotterMoitessier.py:287 openplotterMoitessier.py:296
+#: openplotterMoitessier.py:297 openplotterMoitessier.py:306
 msgid "To get accurate readings, make sure the sensor is not being read by another application."
 msgstr "Jotta saat laadukkaita lukemia, varmista, että toiset ohjelmat eivät lue sensoreita."
 
-#: openplotterMoitessier.py:295
+#: openplotterMoitessier.py:305
 msgid "MS5607-02BA03 pressure and temperature: "
 msgstr "MS5607-02BA03 paine ja lämpötila: "
 
-#: openplotterMoitessier.py:336
+#: openplotterMoitessier.py:334
+msgid "Moitessier HAT package is not installed!\n"
+msgstr "Moitessier HAT paketti ei ole asennettu!\n"
+
+#: openplotterMoitessier.py:346
 msgid " Current kernel version "
 msgstr " Nykyinen ytimen versio "
 
-#: openplotterMoitessier.py:342
+#: openplotterMoitessier.py:352
 msgid " Supported versions "
 msgstr " Tuetut versiot "
 
-#: openplotterMoitessier.py:361
+#: openplotterMoitessier.py:371
 msgid "The current package does not support the current kernel. Try to update the package. If you do not find a suitable package contact us at https://rooco.eu"
 msgstr "Nykyinen paketti ei tue nykyistä kerneliä. Yritä päivittää paketti. Ellet löydä sopivaa pakettia, ota meihin yhteyttä osoitteessa https://rooco.eu"
 
-#: openplotterMoitessier.py:366
+#: openplotterMoitessier.py:376
 msgid "Moitessier HAT package is not installed, please install it."
 msgstr "Moitessier HAT paetti ei ole asennettu, asenna se."
 
-#: openplotterMoitessier.py:369
+#: openplotterMoitessier.py:379
 msgid " Available packages "
 msgstr " Saatavilla olevat paketit "
 
-#: openplotterMoitessier.py:374
+#: openplotterMoitessier.py:384
 msgid "Install"
 msgstr "Asenna"
 
-#: openplotterMoitessier.py:377
+#: openplotterMoitessier.py:387
 msgid "Uninstall"
 msgstr "Poista"
 
-#: openplotterMoitessier.py:380
+#: openplotterMoitessier.py:390
 msgid "Download"
 msgstr "Lataa"
 
-#: openplotterMoitessier.py:383
+#: openplotterMoitessier.py:393
 msgid "All drivers"
 msgstr "Kaikki ajurit"
 
-#: openplotterMoitessier.py:429
+#: openplotterMoitessier.py:439
 msgid "Select a package to install."
 msgstr "Valitse asennettava paketti."
 
-#: openplotterMoitessier.py:432
+#: openplotterMoitessier.py:442
 msgid "After installing the selected package, OpenPlotter will restart. Are you sure?"
 msgstr "Valitun paketin asennuksen jälkeen OpenPlotter käynnistyy uudestaan. Oletko varma?"
 
-#: openplotterMoitessier.py:433 openplotterMoitessier.py:459
+#: openplotterMoitessier.py:443 openplotterMoitessier.py:469
 msgid "Question"
 msgstr "Kysymys"
 
-#: openplotterMoitessier.py:441
+#: openplotterMoitessier.py:451
 msgid "Updating Moitessier Hat modules and firmware..."
 msgstr "Päivitetään Moitessier Hat moduulit ja firmware..."
 
-#: openplotterMoitessier.py:451
+#: openplotterMoitessier.py:461
 msgid "Installing package data, please wait... "
 msgstr "Asennetaan pakettidataa, odottele... "
 
-#: openplotterMoitessier.py:458
+#: openplotterMoitessier.py:468
 msgid "After uninstalling the package, OpenPlotter will restart. Are you sure?"
 msgstr "Valitun paketin poiston jälkeen OpenPlotter käynnistyy uudestaan. Oletko varma?"
 
-#: openplotterMoitessier.py:470
+#: openplotterMoitessier.py:480
 msgid "Removing Moitessier Hat drivers, please wait... "
 msgstr "Poistetaan Moitessier Hat ajureita, odottele... "
 
-#: openplotterMoitessier.py:487
+#: openplotterMoitessier.py:497
 msgid "Moitessier Hat drivers removed."
 msgstr "Moitessier Hat ajurit poistettu."
 
-#: openplotterMoitessier.py:495
+#: openplotterMoitessier.py:505
 msgid "Searching package "
 msgstr "Etsitään pakettia "
 
-#: openplotterMoitessier.py:498
+#: openplotterMoitessier.py:508
 msgid "Package downloaded!"
 msgstr "Paketti ladattu!"
 
-#: openplotterMoitessier.py:500
+#: openplotterMoitessier.py:510
 msgid "Package not found!"
 msgstr "Pakettia ei löydetty!"
 
-#: openplotterMoitessier.py:510
+#: openplotterMoitessier.py:520
 msgid "Enable"
 msgstr "Ota käyttöön"
 
-#: openplotterMoitessier.py:513
+#: openplotterMoitessier.py:523
 msgid "Disable"
 msgstr "Poista käytöstä"
 
-#: openplotterMoitessier.py:516
+#: openplotterMoitessier.py:526
 msgid " General "
 msgstr " Yleistä "
 
-#: openplotterMoitessier.py:518
+#: openplotterMoitessier.py:528
 msgid "Reset HAT"
 msgstr "Nollaa HAT"
 
-#: openplotterMoitessier.py:521
+#: openplotterMoitessier.py:531
 msgid "Load defaults"
 msgstr "Lataa oletukset"
 
-#: openplotterMoitessier.py:526
+#: openplotterMoitessier.py:536
 msgid "enable simulator"
 msgstr "salli simulaattori"
 
-#: openplotterMoitessier.py:528
+#: openplotterMoitessier.py:538
 msgid "interval (ms)"
 msgstr "väli (ms)"
 
-#: openplotterMoitessier.py:531
+#: openplotterMoitessier.py:541
 msgid "MMSI boat 1"
 msgstr "MMSI vene 1"
 
-#: openplotterMoitessier.py:534
+#: openplotterMoitessier.py:544
 msgid "MMSI boat 2"
 msgstr "MMSI vene 2"
 
-#: openplotterMoitessier.py:537
+#: openplotterMoitessier.py:547
 msgid "channel A [Hz]"
 msgstr "kanava A [Hz]"
 
-#: openplotterMoitessier.py:538
+#: openplotterMoitessier.py:548
 msgid "channel B [Hz]"
 msgstr "kanava B [Hz]"
 
-#: openplotterMoitessier.py:544 openplotterMoitessier.py:887
-#: openplotterMoitessier.py:899
+#: openplotterMoitessier.py:554 openplotterMoitessier.py:897
+#: openplotterMoitessier.py:909
 msgid "none"
 msgstr "ei mitään"
 
-#: openplotterMoitessier.py:627
+#: openplotterMoitessier.py:637
 msgid "Failure reading HAT settings!"
 msgstr "Virhe luettaessa HAT asetuksia!"
 
-#: openplotterMoitessier.py:652
+#: openplotterMoitessier.py:662
 msgid "Failure reading default_config.xml file!"
 msgstr "Virhe luettaessa default_config.xml tiedostoa!"
 
-#: openplotterMoitessier.py:654
+#: openplotterMoitessier.py:664
 msgid "Defaults loaded. Apply changes"
 msgstr "Vakiot ladattu. Lisää muutokset"
 
-#: openplotterMoitessier.py:689
+#: openplotterMoitessier.py:699
 msgid "Changes applied!"
 msgstr "Muutokset lisätty!"
 
-#: openplotterMoitessier.py:691
+#: openplotterMoitessier.py:701
 msgid "Apply changes failed!"
 msgstr "Muutokset epäonnistui!"
 
-#: openplotterMoitessier.py:704
+#: openplotterMoitessier.py:714
 msgid "Device:"
 msgstr "Laite:"
 
-#: openplotterMoitessier.py:721
+#: openplotterMoitessier.py:731
 msgid "Alias:"
 msgstr "Alias:"
 
-#: openplotterMoitessier.py:724 openplotterMoitessier.py:797
-#: openplotterMoitessier.py:827 openplotterMoitessier.py:903
+#: openplotterMoitessier.py:734 openplotterMoitessier.py:807
+#: openplotterMoitessier.py:837 openplotterMoitessier.py:913
 msgid "Connection: "
 msgstr "Yhteys: "
 
-#: openplotterMoitessier.py:734 openplotterMoitessier.py:741
+#: openplotterMoitessier.py:744 openplotterMoitessier.py:751
 msgid "App = "
 msgstr "App = "
 
-#: openplotterMoitessier.py:734 openplotterMoitessier.py:741
+#: openplotterMoitessier.py:744 openplotterMoitessier.py:751
 msgid "Device = "
 msgstr "Device = "
 
-#: openplotterMoitessier.py:734 openplotterMoitessier.py:741
+#: openplotterMoitessier.py:744 openplotterMoitessier.py:751
 msgid "ID = "
 msgstr "ID = "
 
-#: openplotterMoitessier.py:735 openplotterMoitessier.py:742
+#: openplotterMoitessier.py:745 openplotterMoitessier.py:752
 msgid "Status = enabled"
 msgstr "Tila = käytössä"
 
-#: openplotterMoitessier.py:738 openplotterMoitessier.py:743
+#: openplotterMoitessier.py:748 openplotterMoitessier.py:753
 msgid "Status = disabled"
 msgstr "Tila = estetty"
 
-#: openplotterMoitessier.py:754 openplotterMoitessier.py:821
-#: openplotterMoitessier.py:851 openplotterMoitessier.py:927
+#: openplotterMoitessier.py:764 openplotterMoitessier.py:831
+#: openplotterMoitessier.py:861 openplotterMoitessier.py:937
 msgid "not connected"
 msgstr "ei yhdistetty"
 
-#: openplotterMoitessier.py:762
+#: openplotterMoitessier.py:772
 msgid "Compass - Trim - Heel"
 msgstr "Kompassi - Trimmi - Kallistus"
 
-#: openplotterMoitessier.py:770
+#: openplotterMoitessier.py:780
 msgid "Please install openplotter-pypilot app"
 msgstr "Asenna openplotter-pypilot app"
 
-#: openplotterMoitessier.py:774
+#: openplotterMoitessier.py:784
 msgid "Pypilot mode: "
 msgstr "Pypilot tila: "
 
-#: openplotterMoitessier.py:787
+#: openplotterMoitessier.py:797
 msgid "only compass"
 msgstr "vain kompassi"
 
-#: openplotterMoitessier.py:788
+#: openplotterMoitessier.py:798
 msgid "autopilot"
 msgstr "autopilotti"
 
-#: openplotterMoitessier.py:791 openplotterMoitessier.py:818
-#: openplotterMoitessier.py:848 openplotterMoitessier.py:924
+#: openplotterMoitessier.py:801 openplotterMoitessier.py:828
+#: openplotterMoitessier.py:858 openplotterMoitessier.py:934
 msgid "disabled"
 msgstr "estetty"
 
-#: openplotterMoitessier.py:810 openplotterMoitessier.py:840
-#: openplotterMoitessier.py:916
+#: openplotterMoitessier.py:820 openplotterMoitessier.py:850
+#: openplotterMoitessier.py:926
 msgid "Signal K connection ID = "
 msgstr "Signal K kytkentä ID = "
 
-#: openplotterMoitessier.py:859
+#: openplotterMoitessier.py:869
 msgid "Pressure - Temperature"
 msgstr "Paine - Lämpötila"
 
-#: openplotterMoitessier.py:865
+#: openplotterMoitessier.py:875
 msgid "Please install openplotter-i2c app"
 msgstr "Asenna openplotter-i2c app"
 
-#: openplotterMoitessier.py:880
+#: openplotterMoitessier.py:890
 msgid "I2C - Signal K key for pressure: "
 msgstr "I2C - Signal K nappi paineelle: "
 
-#: openplotterMoitessier.py:892
+#: openplotterMoitessier.py:902
 msgid "I2C - Signal K key for temperature: "
 msgstr "I2C - Signal K nappi lämpötilalle: "
 
-#: openplotterMoitessier.py:948
+#: openplotterMoitessier.py:958
 msgid "Before OpenCPN 5.2 you needed the Signal K plugin \"Convert Signal K to NMEA 0183\", now you can disable it and create a Signal K connection directly in OpenCPN."
 msgstr "Ennen OpenCPN 5.2 tarvitsit Signal K lisäosan \"Muuta Signal K NMEA 0183:ksi\", nyt voit poistaa sen ja muodostaa suoran Signal K yhteyden OpenCPN:ään."
 
-#: openplotterMoitessier.py:971
+#: openplotterMoitessier.py:981
 msgid ""
 "The default OpenCPN connection is missing and is not getting data from Signal K. Please create this connection in OpenCPN:\n"
 "Network\n"
@@ -407,11 +411,11 @@ msgstr ""
 "Adress: localhost\n"
 "Data Port: "
 
-#: openplotterMoitessier.py:974
+#: openplotterMoitessier.py:984
 msgid "The default OpenCPN connection is disabled and is not getting data from Signal K. Please enable the Signal K connection in OpenCPN"
 msgstr "Vakio OpenCPN kytkentä on estetty, eikä saa dataa Signal K: sta. Salli Signal K kytkentä OpenCPN:ssä"
 
-#: openplotterMoitessier.py:977
+#: openplotterMoitessier.py:987
 msgid ""
 "Network\n"
 "Protocol: Signal K\n"
@@ -423,7 +427,7 @@ msgstr ""
 "Address: localhost\n"
 "DataPort: "
 
-#: openplotterMoitessier.py:980
+#: openplotterMoitessier.py:990
 msgid "Unable to read OpenCPN configuration"
 msgstr "OpenCPN kokoonpanon luku ei onnistu"
 
@@ -431,42 +435,42 @@ msgstr "OpenCPN kokoonpanon luku ei onnistu"
 msgid "Checking Moitessier HAT..."
 msgstr "Tarkistetaan Moitessier HAT..."
 
-#: startup.py:49 startup.py:51
+#: startup.py:50 startup.py:52
 msgid "not attached"
 msgstr "ei liitetty"
 
-#: startup.py:52
+#: startup.py:54
 msgid "attached"
 msgstr "liittetty"
 
-#: startup.py:56
+#: startup.py:59
 msgid "Your Raspberry Pi is too old!"
 msgstr "Raspberry Pi: si on liian vanha!"
 
-#: startup.py:60
+#: startup.py:61
 msgid "I2C enabled"
 msgstr "I2C sallittu"
 
-#: startup.py:64
+#: startup.py:65
 msgid "I2C is disabled. Please enable I2C interface in Preferences -> Raspberry Pi configuration -> Interfaces."
 msgstr "I2C on estetty. Salli I2C liityntä Valinnat -> Raspberry Pi asetukset -> liitokset kohdassa."
 
-#: startup.py:70
+#: startup.py:71
 msgid "SPI enabled"
 msgstr "SPI sallittu"
 
-#: startup.py:74
+#: startup.py:75
 msgid "SPI is disabled. Please enable SPI interface in Preferences -> Raspberry Pi configuration -> Interfaces."
 msgstr "I2C on estetty. Salli I2C liityntä Valinnat -> Raspberry Pi asetukset -> liitokset kohdassa."
 
-#: startup.py:80
+#: startup.py:81
 msgid "Moitessier HAT driver is not installed."
 msgstr "Moitessier HAT ajuri ei ole asennettu."
 
-#: startup.py:84
-msgid "package installed"
-msgstr "paketti asennettu"
+#: startup.py:85
+msgid "driver installed"
+msgstr "ajuri on asennettu"
 
-#: startup.py:95
-msgid "The installed package does not support the current kernel version, go to Moitessier HAT app to update it."
-msgstr "Asennettu paketti ei tue tätä kernelin versiota, päivitä se Moitessier HAT apissa."
+#: startup.py:100
+msgid "The installed driver does not support the current kernel version, go to Moitessier HAT app to update it."
+msgstr "Asennettu ajuri ei tue nykyistä ytimen versiota, siirry Moitessier HAT -sovellukseen päivittääksesi sen."
