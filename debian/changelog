@@ -1,5 +1,6 @@
-openplotter-moitessier (2.4.1-stable) bionic; urgency=medium
+openplotter-moitessier (2.4.2-stable) bionic; urgency=medium
 
+  * Update drivers
   * Update translations
   * Fix error in ubuntu for raspberry
   * Add warning if hat is not attached
